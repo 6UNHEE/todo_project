@@ -23,7 +23,9 @@
   - 필수 : SafeArea, 바깥 여백
   - 옵션 : AppBar 설정, child 위젯
 1. 사용자 정보 등록 페이지
-![alt text](image.png) ![alt text](image-1.png)
+
+<img width="275" height="577" alt="Image" src="https://github.com/user-attachments/assets/0377640e-0049-4e45-adb5-3eb2cdfd18d3" /> <img width="276" height="580" alt="Image" src="https://github.com/user-attachments/assets/12822431-538b-4d22-9fba-50b4d1083042" />
+
    - 사용자 이름이나 자기소개 클릭 시, 프로필 설정 화면으로 이동
    - AppBar 추가
    - Column 으로 배치, Padding으로 여백 
