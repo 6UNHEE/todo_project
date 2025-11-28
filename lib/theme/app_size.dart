@@ -14,7 +14,7 @@ class AppSize {
   /// 이름 설정/변경 컨테이너 높이
   static const nameContainerHeight = 40.0;
 
-  /// 프로필 사진 크기
-  static const profileImageSizeS = 30.0;
-  static const profileImageSizeL = 40.0;
+  /// 아이콘 크기
+  static const iconSizeS = 30.0;
+  static const iconSizeL = 40.0;
 }

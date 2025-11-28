@@ -12,13 +12,9 @@ class ProfileImage extends StatelessWidget {
       // TODO 프로필 사진 업로드 구현
       onTap: () {},
       child: CircleAvatar(
-        radius: AppSize.profileImageSizeL,
+        radius: AppSize.iconSizeL,
         backgroundColor: AppTheme.lightGray,
-        child: Icon(
-          Icons.person,
-          size: AppSize.profileImageSizeL,
-          color: Colors.white,
-        ),
+        child: Icon(Icons.person, size: AppSize.iconSizeL, color: Colors.white),
       ),
     );
   }

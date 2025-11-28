@@ -12,7 +12,6 @@ class ProfileSettingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppScaffold(
       title: Text('프로필'),
-
       child: Column(
         spacing: 50.0,
         children: [
