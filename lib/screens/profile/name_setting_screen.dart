@@ -26,10 +26,7 @@ class _NameSettingScreenState extends State<NameSettingScreen> {
         TextButton(
           // TODO 확인 버튼 클릭 시 이름 저장
           onPressed: () {},
-          child: Text(
-            '확인',
-            style: TextStyle(fontWeight: FontWeight.w700, color: Colors.black),
-          ),
+          child: Text('확인'),
         ),
       ],
       child: NameContainer(

@@ -22,9 +22,7 @@ class AppScaffold extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: appBarText != null
-            ? Text(appBarText!, style: TextStyle(fontWeight: FontWeight.bold))
-            : null,
+        title: appBarText != null ? Text(appBarText!) : null,
         centerTitle: appBarText != null,
         actions: actions,
       ),

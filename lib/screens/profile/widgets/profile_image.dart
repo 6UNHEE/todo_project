@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_project/theme/app_size.dart';
+import 'package:todo_project/theme/app_theme.dart';
 
 class ProfileImage extends StatelessWidget {
   /// 프로필 사진 업로드 위젯
@@ -12,7 +13,7 @@ class ProfileImage extends StatelessWidget {
       onTap: () {},
       child: CircleAvatar(
         radius: AppSize.profileImageSizeL,
-        backgroundColor: Colors.grey[200],
+        backgroundColor: AppTheme.lightGray,
         child: Icon(
           Icons.person,
           size: AppSize.profileImageSizeL,

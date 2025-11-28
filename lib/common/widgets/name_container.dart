@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_project/theme/app_size.dart';
+import 'package:todo_project/theme/app_theme.dart';
 
 class NameContainer extends StatelessWidget {
   final Widget? child;
@@ -14,7 +15,7 @@ class NameContainer extends StatelessWidget {
       height: AppSize.nameContainerHeight,
       padding: EdgeInsets.symmetric(horizontal: AppSize.containerPaddingS),
       decoration: BoxDecoration(
-        color: Colors.grey[200],
+        color: AppTheme.lightGray,
         borderRadius: BorderRadius.circular(AppSize.containerRadiusS),
       ),
       child: child,
