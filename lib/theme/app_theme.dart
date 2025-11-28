@@ -39,5 +39,6 @@ class AppTheme {
         ),
       ),
     ),
+    textSelectionTheme: TextSelectionThemeData(cursorColor: charcoal),
   );
 }
