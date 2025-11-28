@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todo_project/screens/main_screen.dart';
+import 'package:todo_project/screens/todo/main_screen.dart';
+
 import 'package:todo_project/theme/app_theme.dart';
 
 void main() {
