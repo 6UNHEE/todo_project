@@ -26,17 +26,20 @@
 1. 사용자 정보 등록 페이지
 
 <img width="275" height="577" alt="Image" src="https://github.com/user-attachments/assets/0377640e-0049-4e45-adb5-3eb2cdfd18d3" /> <img width="276" height="580" alt="Image" src="https://github.com/user-attachments/assets/12822431-538b-4d22-9fba-50b4d1083042" />
+<img width="312" height="647" alt="Image" src="https://github.com/user-attachments/assets/0e0b2d0c-7732-43d1-b028-bc47f8c2edb4" />
 
    - 사용자 이름이나 자기소개 클릭 시, 프로필 설정 화면으로 이동
    - AppBar 추가
    - Column 으로 배치, Padding으로 여백 
-   - 이름, 자기소개 컨테이너 클릭 시 설정할 수 있는 페이지로 이동
-   - 이름은 30자, 자기소개는 50자 제한 
-   - 이름과 자기소개 변경 후 확인 클릭 시 설정 변경
+   - 이름 클릭 시 설정할 수 있는 페이지로 이동
+   - 이름 30자 제한 
+   - 이름 변경 후 확인 클릭 시 설정 변경
    - 프로필 사진 업로드 기능 공부 필요!
    - Container 공통 위젯으로 묶기
+   - 프로필 사진을 설정하지 않은 경우 갤러리로 이동하여 프로필 사진 선택
+   - 프로필 사진을 설정한 경우 프로필 사진 클릭 시 AlertDialog로 수정/삭제/취소 선택 가능
   
-  2. Todo List 
+  1. Todo List 
    
   <img width="213" height="451" alt="Image" src="https://github.com/user-attachments/assets/83f1362c-d488-4bfc-b81f-5e2f6555e8b3" />
 
