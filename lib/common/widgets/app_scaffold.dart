@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_project/theme/app_size.dart';
 
 class AppScaffold extends StatelessWidget {
   final Widget child;
@@ -24,11 +25,15 @@ class AppScaffold extends StatelessWidget {
         title: appBarText != null
             ? Text(appBarText!, style: TextStyle(fontWeight: FontWeight.bold))
             : null,
+        centerTitle: appBarText != null,
         actions: actions,
       ),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsetsGeometry.symmetric(horizontal: 20.0),
+          padding: EdgeInsets.symmetric(
+            horizontal: AppSize.appPaddingS,
+            vertical: AppSize.appPaddingS,
+          ),
           child: child,
         ),
       ),
