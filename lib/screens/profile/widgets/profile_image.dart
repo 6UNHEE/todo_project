@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_project/screens/profile/widgets/image_dialog.dart';
+import 'package:todo_project/common/widgets/custom_dialog.dart';
 import 'package:todo_project/theme/app_size.dart';
 import 'package:todo_project/theme/app_theme.dart';
 
@@ -12,7 +12,20 @@ class ProfileImage extends StatelessWidget {
     return GestureDetector(
       // TODO 프로필 사진 업로드 구현, 조건 필요
       onTap: () {
-        showDialog(context: context, builder: (context) => ImageDialog());
+        showDialog(
+          context: context,
+          builder: (context) => CustomDialog(
+            title: Text('프로필 이미지', textAlign: TextAlign.center),
+            actions: [
+              ElevatedButton(onPressed: () {}, child: Text('수정')),
+              ElevatedButton(onPressed: () {}, child: Text('삭제')),
+              ElevatedButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text('취소'),
+              ),
+            ],
+          ),
+        );
       },
       child: CircleAvatar(
         radius: AppSize.iconSizeL,
