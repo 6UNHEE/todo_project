@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_project/screens/todo/widgets/add_list.dart';
 import 'package:todo_project/theme/app_size.dart';
 import 'package:todo_project/theme/app_theme.dart';
 
@@ -31,7 +32,12 @@ class AppScaffold extends StatelessWidget {
       appBar: AppBar(title: title, centerTitle: true, actions: actions),
       floatingActionButton: (isMainScreen ?? false)
           ? FloatingActionButton(
-              onPressed: () {},
+              onPressed: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) => AddList(),
+                );
+              },
               shape: CircleBorder(),
               backgroundColor: AppTheme.lightGray,
               child: Icon(
