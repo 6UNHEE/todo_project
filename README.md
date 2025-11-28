@@ -42,11 +42,13 @@
   1. Todo List 
    
   <img width="213" height="451" alt="Image" src="https://github.com/user-attachments/assets/83f1362c-d488-4bfc-b81f-5e2f6555e8b3" />
+  <img width="336" height="703" alt="Image" src="https://github.com/user-attachments/assets/5176312f-6040-43ab-93d7-a05e99e91ffc" />
 
   - AppBar leading 위젯 popupmenubutton으로 필터 기능 추가
   - 프로필 사진과 이름 표시, 이름 클릭 시 프로필 설정 화면으로 이동
   - 각 항목은 List View + checkboxListTile으로 구현 
   - 항목별로 삭제/수정 가능
   - floatingActionButton으로 항목 추가 가능
+  - showBottomModalSheet로 메모 추가, 임시저장 가능
   - 방법 1. (프로필 사진, 이름) (검색창) (리스트) 로 구성하고 리스트 제외한 위젯 사이즈를 정해준 뒤 리스트를 Expanded로 감싸줄 예정 → 
   
