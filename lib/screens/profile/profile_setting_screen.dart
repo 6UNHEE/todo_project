@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_project/common/widgets/app_scaffold.dart';
 import 'package:todo_project/common/widgets/name_container.dart';
 import 'package:todo_project/screens/profile/name_setting_screen.dart';
+import 'package:todo_project/screens/profile/widgets/profile_image.dart';
 
 class ProfileSettingScreen extends StatelessWidget {
   /// 프로필 설정 화면
@@ -15,7 +16,7 @@ class ProfileSettingScreen extends StatelessWidget {
         spacing: 50.0,
         children: [
           // TODO 프로필 사진 변경 기능
-          SizedBox(width: 50.0, height: 50.0, child: Placeholder()),
+          ProfileImage(),
           GestureDetector(
             onTap: () => Navigator.push(
               context,
