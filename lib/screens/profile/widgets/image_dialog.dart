@@ -17,7 +17,10 @@ class ImageDialog extends StatelessWidget {
       actions: [
         ElevatedButton(onPressed: () {}, child: Text('수정')),
         ElevatedButton(onPressed: () {}, child: Text('삭제')),
-        ElevatedButton(onPressed: () {}, child: Text('취소')),
+        ElevatedButton(
+          onPressed: () => Navigator.pop(context),
+          child: Text('취소'),
+        ),
       ],
       backgroundColor: Colors.white,
     );
