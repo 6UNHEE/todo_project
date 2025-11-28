@@ -35,7 +35,7 @@ class _TodoListState extends State<TodoList> {
       },
       separatorBuilder: (context, index) =>
           SizedBox(height: AppSize.appPaddingS),
-      itemCount: 3,
+      itemCount: list.length,
     );
   }
 }
