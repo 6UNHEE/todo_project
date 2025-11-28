@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_project/screens/profile/profile_setting_screen.dart';
+import 'package:todo_project/screens/main_screen.dart';
 import 'package:todo_project/theme/app_theme.dart';
 
 void main() {
@@ -11,6 +11,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(theme: AppTheme.light, home: ProfileSettingScreen());
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.light,
+      home: MainScreen(),
+    );
   }
 }
