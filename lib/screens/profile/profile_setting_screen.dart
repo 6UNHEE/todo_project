@@ -3,7 +3,6 @@ import 'package:todo_project/common/widgets/app_scaffold.dart';
 import 'package:todo_project/common/widgets/name_container.dart';
 import 'package:todo_project/screens/profile/name_setting_screen.dart';
 import 'package:todo_project/screens/profile/widgets/profile_image.dart';
-import 'package:todo_project/theme/app_size.dart';
 
 class ProfileSettingScreen extends StatelessWidget {
   /// 프로필 설정 화면
