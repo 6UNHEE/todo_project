@@ -28,7 +28,7 @@
 <img width="275" height="577" alt="Image" src="https://github.com/user-attachments/assets/0377640e-0049-4e45-adb5-3eb2cdfd18d3" /> <img width="276" height="580" alt="Image" src="https://github.com/user-attachments/assets/12822431-538b-4d22-9fba-50b4d1083042" />
 <img width="312" height="647" alt="Image" src="https://github.com/user-attachments/assets/0e0b2d0c-7732-43d1-b028-bc47f8c2edb4" />
 
-   - 사용자 이름이나 자기소개 클릭 시, 프로필 설정 화면으로 이동
+   - 사용자 이름 클릭 시, 프로필 설정 화면으로 이동
    - AppBar 추가
    - Column 으로 배치, Padding으로 여백 
    - 이름 클릭 시 설정할 수 있는 페이지로 이동

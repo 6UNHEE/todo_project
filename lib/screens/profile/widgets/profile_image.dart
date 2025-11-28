@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_project/screens/profile/widgets/image_dialog.dart';
 import 'package:todo_project/theme/app_size.dart';
 import 'package:todo_project/theme/app_theme.dart';
 
@@ -9,8 +10,10 @@ class ProfileImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // TODO 프로필 사진 업로드 구현
-      onTap: () {},
+      // TODO 프로필 사진 업로드 구현, 조건 필요
+      onTap: () {
+        showDialog(context: context, builder: (context) => ImageDialog());
+      },
       child: CircleAvatar(
         radius: AppSize.iconSizeL,
         backgroundColor: AppTheme.lightGray,

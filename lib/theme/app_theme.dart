@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_project/theme/app_size.dart';
 
 class AppTheme {
   /// 자주 사용하는 밝은 회색
@@ -28,6 +29,15 @@ class AppTheme {
         return lightGray!;
       }),
       side: BorderSide.none,
+    ),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: lightGray,
+        foregroundColor: Colors.black,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadiusGeometry.circular(AppSize.containerRadiusS),
+        ),
+      ),
     ),
   );
 }
