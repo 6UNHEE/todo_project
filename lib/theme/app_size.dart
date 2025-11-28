@@ -2,7 +2,10 @@
 class AppSize {
   // ========padding, borderRadius 값========
   /// 여백 S
-  static const appPaddingS = 30.0;
+  static const appPaddingS = 10.0;
+
+  /// 여백 M
+  static const appPaddingM = 30.0;
 
   /// 컨테이너 여백 S
   static const containerPaddingS = 15.0;

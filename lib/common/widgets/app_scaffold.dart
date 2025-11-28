@@ -43,10 +43,7 @@ class AppScaffold extends StatelessWidget {
           : null,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: AppSize.appPaddingS,
-            vertical: AppSize.appPaddingS,
-          ),
+          padding: EdgeInsets.symmetric(horizontal: AppSize.appPaddingM),
           child: child,
         ),
       ),
