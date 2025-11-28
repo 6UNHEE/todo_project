@@ -3,7 +3,7 @@ import 'package:todo_project/theme/app_size.dart';
 
 class AppScaffold extends StatelessWidget {
   final Widget child;
-  final String? appBarText;
+  final Widget? title;
   final List<Widget>? actions;
 
   /// 공통적으로 사용할 Scaffold 위젯
@@ -11,19 +11,14 @@ class AppScaffold extends StatelessWidget {
   /// `child` : 위젯
   ///
   /// `appBarText` : 화면 이름
-  const AppScaffold({
-    super.key,
-    required this.child,
-    this.appBarText,
-    this.actions,
-  });
+  const AppScaffold({super.key, required this.child, this.actions, this.title});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: appBarText != null ? Text(appBarText!) : null,
-        centerTitle: appBarText != null,
+        title: title,
+        centerTitle: title != null,
         actions: actions,
       ),
       body: SafeArea(

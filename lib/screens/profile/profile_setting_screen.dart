@@ -11,7 +11,8 @@ class ProfileSettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      appBarText: '프로필',
+      title: Text('프로필'),
+
       child: Column(
         spacing: 50.0,
         children: [

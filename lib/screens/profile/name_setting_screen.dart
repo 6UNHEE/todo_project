@@ -21,7 +21,7 @@ class _NameSettingScreenState extends State<NameSettingScreen> {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      appBarText: '이름',
+      title: Text('이름'),
       actions: [
         TextButton(
           // TODO 확인 버튼 클릭 시 이름 저장
