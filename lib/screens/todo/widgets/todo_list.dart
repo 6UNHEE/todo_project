@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_project/common/widgets/custom_dialog.dart';
 import 'package:todo_project/theme/app_size.dart';
 
 class TodoList extends StatefulWidget {
@@ -28,7 +29,36 @@ class _TodoListState extends State<TodoList> {
           },
           title: Text('리스트 ${index + 1}'),
           controlAffinity: ListTileControlAffinity.leading,
-          secondary: IconButton(onPressed: () {}, icon: Icon(Icons.more_horiz)),
+          secondary: IconButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => CustomDialog(
+                  content: Column(
+                    spacing: AppSize.appPaddingM,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ElevatedButton.icon(
+                        onPressed: () {},
+                        label: Text('메모 수정'),
+                        icon: Icon(Icons.delete),
+                      ),
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          list.removeAt(index);
+                          setState(() {});
+                          Navigator.pop(context);
+                        },
+                        label: Text('메모 삭제'),
+                        icon: Icon(Icons.edit),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+            icon: Icon(Icons.more_horiz),
+          ),
           contentPadding: EdgeInsets.zero,
           visualDensity: VisualDensity(vertical: -4.0),
         );
