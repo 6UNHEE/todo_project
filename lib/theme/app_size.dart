@@ -15,7 +15,7 @@ class AppSize {
 
   // ========위젯 사이즈========
   /// 이름 설정/변경 컨테이너 높이
-  static const nameContainerHeight = 40.0;
+  static const greyContainerHeight = 40.0;
 
   /// 아이콘 크기
   static const iconSizeS = 30.0;

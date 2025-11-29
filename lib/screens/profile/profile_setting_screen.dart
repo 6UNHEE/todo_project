@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_project/common/widgets/app_scaffold.dart';
-import 'package:todo_project/common/widgets/name_container.dart';
+import 'package:todo_project/common/widgets/grey_container.dart';
 import 'package:todo_project/providers/user_provider.dart';
 import 'package:todo_project/screens/profile/name_setting_screen.dart';
 import 'package:todo_project/screens/profile/widgets/profile_image.dart';
@@ -24,7 +24,7 @@ class ProfileSettingScreen extends StatelessWidget {
               context,
               MaterialPageRoute(builder: (context) => NameSettingScreen()),
             ),
-            child: NameContainer(
+            child: GreyContainer(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

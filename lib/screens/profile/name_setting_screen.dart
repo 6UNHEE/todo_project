@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_project/common/widgets/app_scaffold.dart';
-import 'package:todo_project/common/widgets/name_container.dart';
+import 'package:todo_project/common/widgets/custom_text_field.dart';
+import 'package:todo_project/common/widgets/grey_container.dart';
 import 'package:todo_project/providers/user_provider.dart';
 
 class NameSettingScreen extends ConsumerWidget {
@@ -22,7 +23,7 @@ class NameSettingScreen extends ConsumerWidget {
           child: Text('확인'),
         ),
       ],
-      child: NameContainer(
+      child: GreyContainer(
         child: TextField(
           onChanged: (value) {
             ref.read(userNameProvider.notifier).state = value;

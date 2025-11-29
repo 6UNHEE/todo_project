@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_project/common/widgets/custom_dialog.dart';
-import 'package:todo_project/common/widgets/name_container.dart';
+import 'package:todo_project/common/widgets/custom_text_field.dart';
+import 'package:todo_project/common/widgets/grey_container.dart';
 import 'package:todo_project/models/tag_model.dart';
 import 'package:todo_project/providers/tag_provider.dart';
-import 'package:todo_project/utils/logger.dart';
 
 class AddTag extends StatelessWidget {
   /// 태그 추가 위젯
@@ -25,21 +25,16 @@ class AddTag extends StatelessWidget {
                 String name = '';
                 return CustomDialog(
                   title: '태그 추가',
-                  content: NameContainer(
-                    child: Form(
-                      key: formKey,
-                      child: TextFormField(
-                        onChanged: (value) {
-                          name = value;
-                        },
-                        validator: (value) {
-                          if (tagList.isDuplicate(name)) {
-                            return '중복된 태그 입니다';
-                          }
-                        },
-                        decoration: InputDecoration(border: InputBorder.none),
-                      ),
-                    ),
+                  content: CustomTextField(
+                    globalKey: formKey,
+                    onChanged: (value) {
+                      name = value;
+                    },
+                    validate: (value) {
+                      if (tagList.isDuplicate(name)) {
+                        return '중복된 태그 입니다.';
+                      }
+                    },
                   ),
                   actions: [
                     ElevatedButton(
