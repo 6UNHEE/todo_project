@@ -15,7 +15,6 @@ class TodoNotifier extends StateNotifier<List<TodoModel>> {
   /// To do 리스트 추가
   void addList({required TodoModel todo}) {
     state = [...state, todo];
-    print(todo);
   }
 
   /// To do 리스트 삭제

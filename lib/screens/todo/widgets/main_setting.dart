@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_project/screens/todo/widgets/filter_setting.dart';
-import 'package:todo_project/screens/todo/widgets/tag_setting.dart';
+import 'package:todo_project/screens/todo/widgets/tag/tag_setting.dart';
 
 class MainSetting extends StatefulWidget {
   /// Main 화면 AppBar action
