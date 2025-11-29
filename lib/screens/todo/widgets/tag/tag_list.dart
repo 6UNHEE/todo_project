@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_project/common/widgets/custom_dialog.dart';
 import 'package:todo_project/common/widgets/custom_text_field.dart';
-import 'package:todo_project/models/tag_model.dart';
 import 'package:todo_project/providers/tag_provider.dart';
 
 class TagList extends ConsumerWidget {
@@ -36,6 +35,7 @@ class TagList extends ConsumerWidget {
                   if (tagPro.isDuplicate(name)) {
                     return '중복된 태그 입니다.';
                   }
+                  return null;
                 },
               ),
               actions: [

@@ -33,6 +33,7 @@ class AddTag extends StatelessWidget {
                       if (tagList.isDuplicate(name)) {
                         return '중복된 태그 입니다.';
                       }
+                      return null;
                     },
                   ),
                   actions: [

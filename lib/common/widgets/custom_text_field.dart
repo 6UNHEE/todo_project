@@ -32,6 +32,7 @@ class CustomTextField extends StatelessWidget {
           onChanged: onChanged,
           validator: validate,
           initialValue: initialValue,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             hint: hint,
             hintText: hintText,
