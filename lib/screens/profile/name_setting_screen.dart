@@ -15,9 +15,10 @@ class NameSettingScreen extends ConsumerWidget {
       actions: [
         TextButton(
           onPressed: () async {
-            final userName = ref.read(userNameProvider);
-            final userService = ref.read(userServiceProvider);
-            await userService.saveUserName(name: userName);
+            final userName = ref.read(userNotifierProvider);
+            await ref
+                .read(userNotifierProvider.notifier)
+                .saveName(name: userName);
           },
           child: Text('확인'),
         ),
@@ -25,7 +26,7 @@ class NameSettingScreen extends ConsumerWidget {
       child: GreyContainer(
         child: TextField(
           onChanged: (value) {
-            ref.read(userNameProvider.notifier).state = value;
+            ref.read(userNotifierProvider.notifier).updateName(name: value);
           },
           maxLength: 30,
           decoration: InputDecoration(

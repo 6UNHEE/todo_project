@@ -1,10 +1,14 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:todo_project/models/tag_model.dart';
+import 'package:todo_project/services/tag_service.dart';
 import 'package:todo_project/utils/logger.dart';
 
 final tagProvider = StateNotifierProvider<TagNotifier, List<TagModel>>(
   (ref) => TagNotifier(),
 );
+
+final tagServiceProvider = Provider<TagService>((ref) => TagService());
 
 /// Tag 관련 상태
 class TagNotifier extends StateNotifier<List<TagModel>> {

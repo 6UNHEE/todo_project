@@ -9,7 +9,8 @@ void main() async {
   // Hive 초기화
   await Hive.initFlutter();
   // databox = 저장공간
-  await Hive.openBox('databox');
+  await Hive.openBox('userbox');
+  await Hive.openBox('tagbox');
   runApp(const ProviderScope(child: MyApp()));
 }
 
