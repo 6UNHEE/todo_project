@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_project/common/widgets/app_scaffold.dart';
 import 'package:todo_project/common/widgets/name_container.dart';
+import 'package:todo_project/providers/user_provider.dart';
 import 'package:todo_project/screens/profile/name_setting_screen.dart';
 import 'package:todo_project/screens/profile/widgets/profile_image.dart';
 
@@ -27,8 +29,17 @@ class ProfileSettingScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('이름'),
-                  // TODO 설정한 이름으로 보이게 하기, 기본 값은 공백
-                  Text('으니', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Consumer(
+                    builder: (context, ref, child) {
+                      final userService = ref.read(userServiceProvider);
+                      final name = userService.name;
+
+                      return Text(
+                        name,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),

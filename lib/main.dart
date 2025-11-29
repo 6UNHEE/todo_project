@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todo_project/screens/todo/main_screen.dart';
 
 import 'package:todo_project/theme/app_theme.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  // Hive 초기화
+  await Hive.initFlutter();
+  // databox = 저장공간
+  await Hive.openBox('databox');
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

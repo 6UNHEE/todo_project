@@ -1,37 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_project/common/widgets/app_scaffold.dart';
 import 'package:todo_project/common/widgets/name_container.dart';
+import 'package:todo_project/providers/user_provider.dart';
 
-class NameSettingScreen extends StatefulWidget {
+class NameSettingScreen extends ConsumerWidget {
+  /// 이름 설정
   const NameSettingScreen({super.key});
 
   @override
-  State<NameSettingScreen> createState() => _NameSettingScreenState();
-}
-
-class _NameSettingScreenState extends State<NameSettingScreen> {
-  final TextEditingController _nameController = TextEditingController();
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return AppScaffold(
       title: Text('이름'),
       actions: [
         TextButton(
-          // TODO 확인 버튼 클릭 시 이름 저장
-          onPressed: () {},
+          onPressed: () async {
+            final userName = ref.read(userNameProvider);
+            final userService = ref.read(userServiceProvider);
+            await userService.saveUserName(name: userName);
+          },
           child: Text('확인'),
         ),
       ],
       child: NameContainer(
-        child: TextFormField(
-          controller: _nameController,
+        child: TextField(
+          onChanged: (value) {
+            ref.read(userNameProvider.notifier).state = value;
+          },
           maxLength: 30,
           decoration: InputDecoration(
             hint: Text('이름 입력'),
