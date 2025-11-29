@@ -1,26 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_project/models/todo_model.dart';
+import 'package:todo_project/providers/todo_provider.dart';
 import 'package:todo_project/theme/app_size.dart';
 import 'package:todo_project/theme/app_theme.dart';
 
-class AddList extends StatefulWidget {
-  /// Todo 리스트 추가
+class AddList extends ConsumerWidget {
+  /// To do 리스트 추가
   const AddList({super.key});
 
   @override
-  State<AddList> createState() => _AddListState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final todoText = ref.watch(todoTextProvider);
 
-class _AddListState extends State<AddList> {
-  final TextEditingController _todoController = TextEditingController();
-
-  @override
-  void dispose() {
-    _todoController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return Container(
       height: 150,
       color: Colors.white,
@@ -28,10 +20,8 @@ class _AddListState extends State<AddList> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           TextFormField(
-            controller: _todoController,
             onChanged: (value) {
-              // TODO 상태관리로 setState 없이 입력 감지하기
-              setState(() {});
+              ref.read(todoTextProvider.notifier).state = value;
             },
             maxLines: null,
             maxLength: 100,
@@ -42,7 +32,7 @@ class _AddListState extends State<AddList> {
             ),
           ),
           Visibility(
-            visible: _todoController.text.isNotEmpty,
+            visible: todoText.isNotEmpty,
             child: Row(
               spacing: AppSize.appPaddingS,
               mainAxisAlignment: MainAxisAlignment.end,
@@ -54,7 +44,21 @@ class _AddListState extends State<AddList> {
                     style: TextStyle(color: AppTheme.charcoal),
                   ),
                 ),
-                TextButton(onPressed: () {}, child: Text('완료')),
+                TextButton(
+                  onPressed: () {
+                    final now = DateTime.now();
+                    final newTodo = TodoModel(
+                      id: now.millisecondsSinceEpoch,
+                      title: todoText,
+                      tag: null,
+                      createdAt: now.toIso8601String(),
+                      updatedAt: null,
+                    );
+                    ref.read(todoProvider.notifier).addList(todo: newTodo);
+                    Navigator.pop(context);
+                  },
+                  child: Text('완료'),
+                ),
               ],
             ),
           ),

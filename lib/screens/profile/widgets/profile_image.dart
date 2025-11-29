@@ -15,7 +15,7 @@ class ProfileImage extends StatelessWidget {
         showDialog(
           context: context,
           builder: (context) => CustomDialog(
-            title: Text('프로필 이미지', textAlign: TextAlign.center),
+            title: '프로필 이미지',
             actions: [
               ElevatedButton(onPressed: () {}, child: Text('수정')),
               ElevatedButton(onPressed: () {}, child: Text('삭제')),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomDialog extends StatelessWidget {
-  final Widget? title;
+  final String? title;
   final Widget? content;
   final List<Widget>? actions;
 
@@ -11,7 +11,7 @@ class CustomDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: title,
+      title: title != null ? Text(title!, textAlign: TextAlign.center) : null,
       titleTextStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0),
       content: content,
       actions: actions,

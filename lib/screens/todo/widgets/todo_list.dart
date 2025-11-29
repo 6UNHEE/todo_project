@@ -12,7 +12,6 @@ class TodoList extends StatefulWidget {
 
 class _TodoListState extends State<TodoList> {
   /// `isChecked` : 체크 여부
-  ///
   /// `index` : 항목 index
   List<(bool isChecked, int index)> list = List.generate(3, (i) => (false, i));
 
@@ -20,16 +19,19 @@ class _TodoListState extends State<TodoList> {
   Widget build(BuildContext context) {
     return ListView.separated(
       itemBuilder: (context, index) {
-        return CheckboxListTile(
-          value: list[index].$1,
-          onChanged: (value) {
-            // TODO 상태관리로 체크박스 변경
-            setState(() {});
-            list[index] = (value!, index);
-          },
+        return ListTile(
+          contentPadding: EdgeInsets.zero,
+          visualDensity: const VisualDensity(vertical: -4.0),
+          leading: Checkbox(
+            value: list[index].$1,
+            onChanged: (value) {
+              setState(() {
+                list[index] = (value!, index);
+              });
+            },
+          ),
           title: Text('리스트 ${index + 1}'),
-          controlAffinity: ListTileControlAffinity.leading,
-          secondary: IconButton(
+          trailing: IconButton(
             onPressed: () {
               showDialog(
                 context: context,
@@ -40,8 +42,8 @@ class _TodoListState extends State<TodoList> {
                     children: [
                       ElevatedButton.icon(
                         onPressed: () {},
-                        label: Text('메모 수정'),
-                        icon: Icon(Icons.delete),
+                        label: const Text('메모 수정'),
+                        icon: const Icon(Icons.delete),
                       ),
                       ElevatedButton.icon(
                         onPressed: () {
@@ -49,18 +51,16 @@ class _TodoListState extends State<TodoList> {
                           setState(() {});
                           Navigator.pop(context);
                         },
-                        label: Text('메모 삭제'),
-                        icon: Icon(Icons.edit),
+                        label: const Text('메모 삭제'),
+                        icon: const Icon(Icons.edit),
                       ),
                     ],
                   ),
                 ),
               );
             },
-            icon: Icon(Icons.more_horiz),
+            icon: const Icon(Icons.more_horiz),
           ),
-          contentPadding: EdgeInsets.zero,
-          visualDensity: VisualDensity(vertical: -4.0),
         );
       },
       separatorBuilder: (context, index) =>
