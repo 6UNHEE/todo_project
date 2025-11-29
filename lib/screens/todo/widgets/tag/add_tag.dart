@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_project/common/widgets/custom_dialog.dart';
 import 'package:todo_project/common/widgets/custom_text_field.dart';
-import 'package:todo_project/common/widgets/grey_container.dart';
 import 'package:todo_project/models/tag_model.dart';
 import 'package:todo_project/providers/tag_provider.dart';
 
@@ -12,7 +11,7 @@ class AddTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formKey = GlobalKey<FormState>();
+    final tagNameKey = GlobalKey<FormState>();
 
     return ListTile(
       onTap: () {
@@ -26,7 +25,7 @@ class AddTag extends StatelessWidget {
                 return CustomDialog(
                   title: '태그 추가',
                   content: CustomTextField(
-                    globalKey: formKey,
+                    globalKey: tagNameKey,
                     onChanged: (value) {
                       name = value;
                     },
@@ -44,7 +43,7 @@ class AddTag extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                         if (name.isEmpty) return;
-                        if (!(formKey.currentState!.validate())) return;
+                        if (!(tagNameKey.currentState!.validate())) return;
 
                         final newTag = TagModel(
                           id: DateTime.now().millisecondsSinceEpoch,

@@ -10,6 +10,7 @@ class CustomTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final Key? globalKey;
   final String? Function(String? value)? validate;
+  final String? initialValue;
 
   const CustomTextField({
     super.key,
@@ -19,6 +20,7 @@ class CustomTextField extends StatelessWidget {
     this.prefixIcon,
     this.globalKey,
     this.validate,
+    this.initialValue,
   });
 
   @override
@@ -29,6 +31,7 @@ class CustomTextField extends StatelessWidget {
         child: TextFormField(
           onChanged: onChanged,
           validator: validate,
+          initialValue: initialValue,
           decoration: InputDecoration(
             hint: hint,
             hintText: hintText,

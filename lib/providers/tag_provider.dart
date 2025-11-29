@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:todo_project/models/tag_model.dart';
+import 'package:todo_project/utils/logger.dart';
 
 final tagProvider = StateNotifierProvider<TagNotifier, List<TagModel>>(
   (ref) => TagNotifier(),
@@ -29,14 +30,13 @@ class TagNotifier extends StateNotifier<List<TagModel>> {
   }
 
   /// Tag 수정
-  void updateTag({required String id, required String newName}) {
+  void updateTag({required int id, required String newName}) {
     if (!isDuplicate(newName)) {
       state = state
-          .map(
-            (tag) =>
-                tag.id.toString() == id ? tag.copyWith(name: newName) : tag,
-          )
+          .map((tag) => tag.id == id ? tag.copyWith(name: newName) : tag)
           .toList();
+
+      logger.d(state);
     }
   }
 }

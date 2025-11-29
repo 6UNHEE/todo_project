@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_project/common/widgets/custom_dialog.dart';
+import 'package:todo_project/common/widgets/custom_text_field.dart';
+import 'package:todo_project/models/tag_model.dart';
 import 'package:todo_project/providers/tag_provider.dart';
 
 class TagList extends ConsumerWidget {
@@ -11,14 +13,49 @@ class TagList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final newTagNameKey = GlobalKey<FormState>();
+
     final tagList = ref.read(tagProvider);
+    final tagPro = ref.read(tagProvider.notifier);
 
     return ListTile(
       onTap: () {
         showDialog(
           context: context,
           builder: (context) {
-            return CustomDialog(title: '태그 수정');
+            String name = '';
+            return CustomDialog(
+              title: '태그 수정',
+              content: CustomTextField(
+                initialValue: tagList[index].name,
+                globalKey: newTagNameKey,
+                onChanged: (value) {
+                  name = value;
+                },
+                validate: (value) {
+                  if (tagPro.isDuplicate(name)) {
+                    return '중복된 태그 입니다.';
+                  }
+                },
+              ),
+              actions: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('취소'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    if (name.isEmpty) return;
+                    if (!(newTagNameKey.currentState!.validate())) return;
+
+                    tagPro.updateTag(id: tagList[index].id, newName: name);
+                  },
+                  child: Text('완료'),
+                ),
+              ],
+            );
           },
         );
       },

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_project/common/widgets/app_scaffold.dart';
-import 'package:todo_project/common/widgets/custom_text_field.dart';
 import 'package:todo_project/common/widgets/grey_container.dart';
 import 'package:todo_project/providers/user_provider.dart';
 
