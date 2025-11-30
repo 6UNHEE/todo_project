@@ -1,14 +1,26 @@
+import 'package:hive/hive.dart';
 import 'package:todo_project/models/tag_model.dart';
 
-/// To do 모델
-// id, 제목, 이미지(옵션), 태그, created_at, updated_at
-// `isDone` : 완료했는지 안했는지
+part 'todo_model.g.dart';
+
+@HiveType(typeId: 2)
 class TodoModel {
+  @HiveField(0)
   final int id;
+
+  @HiveField(1)
   final String title;
+
+  @HiveField(2)
   final List<TagModel>? tag;
+
+  @HiveField(3)
   final String createdAt;
+
+  @HiveField(4)
   final String? updatedAt;
+
+  @HiveField(5)
   final bool? isDone;
 
   TodoModel({
@@ -20,7 +32,6 @@ class TodoModel {
     this.isDone,
   });
 
-  // copyWith
   TodoModel copyWith({
     int? id,
     String? title,
@@ -39,7 +50,6 @@ class TodoModel {
     );
   }
 
-  // toString
   @override
   String toString() {
     return 'TodoModel(id: $id, title: $title, tag: $tag, createdAt: $createdAt, updatedAt: $updatedAt, isDone: $isDone)';

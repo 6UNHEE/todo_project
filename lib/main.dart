@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todo_project/models/tag_model.dart';
+import 'package:todo_project/models/todo_model.dart';
 import 'package:todo_project/screens/todo/main_screen.dart';
 
 import 'package:todo_project/theme/app_theme.dart';
@@ -10,9 +11,11 @@ void main() async {
   // Hive 초기화
   await Hive.initFlutter();
   Hive.registerAdapter(TagModelAdapter());
-  // databox = 저장공간
+  Hive.registerAdapter(TodoModelAdapter());
+  // box = 저장공간
   await Hive.openBox('userbox');
   await Hive.openBox<TagModel>('tagbox');
+  await Hive.openBox<TodoModel>('todobox');
   runApp(const ProviderScope(child: MyApp()));
 }
 

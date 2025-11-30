@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:todo_project/common/widgets/app_scaffold.dart';
+import 'package:todo_project/screens/todo/list/todo_list.dart';
 import 'package:todo_project/screens/todo/widgets/main_setting.dart';
 import 'package:todo_project/screens/todo/widgets/profile_info.dart';
 import 'package:todo_project/screens/todo/widgets/search_list.dart';
-import 'package:todo_project/screens/todo/list/todo_list.dart';
 import 'package:todo_project/theme/app_size.dart';
 
 class MainScreen extends StatefulWidget {
