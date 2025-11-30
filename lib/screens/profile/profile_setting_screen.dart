@@ -17,7 +17,6 @@ class ProfileSettingScreen extends StatelessWidget {
       child: Column(
         spacing: 50.0,
         children: [
-          // TODO 프로필 사진 변경 기능
           ProfileImage(),
           GestureDetector(
             onTap: () => Navigator.push(

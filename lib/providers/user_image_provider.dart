@@ -18,9 +18,15 @@ class UserImageNotifier extends StateNotifier<XFile?> {
 
   UserImageNotifier(this._service) : super(null);
 
-  /// 사진 업로드
+  /// 프로필 사진 업로드
   Future<void> pickProfileImage() async {
     await _service.pickProfileImage();
+    state = _service.profileImage;
+  }
+
+  /// 프로필 사진 삭제
+  void deleteProfileImage() {
+    _service.deleteProfileImage();
     state = _service.profileImage;
   }
 }

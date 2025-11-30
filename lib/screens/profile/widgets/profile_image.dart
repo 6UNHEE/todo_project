@@ -14,7 +14,6 @@ class ProfileImage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final image = ref.watch(userImageNotifierProvider);
     return GestureDetector(
-      // TODO 프로필 사진 업로드 구현, 조건 필요
       onTap: () {
         showDialog(
           context: context,
@@ -33,7 +32,16 @@ class ProfileImage extends ConsumerWidget {
                 },
                 child: Text('수정'),
               ),
-              ElevatedButton(onPressed: () {}, child: Text('삭제')),
+              ElevatedButton(
+                onPressed: () {
+                  ref
+                      .read(userImageNotifierProvider.notifier)
+                      .deleteProfileImage();
+
+                  Navigator.pop(context);
+                },
+                child: Text('삭제'),
+              ),
               ElevatedButton(
                 onPressed: () => Navigator.pop(context),
                 child: Text('취소'),

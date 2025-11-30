@@ -11,4 +11,9 @@ class UserImageService {
   Future<void> pickProfileImage() async {
     _profileImage = await _picker.pickImage(source: ImageSource.gallery);
   }
+
+  /// 이미지 삭제
+  void deleteProfileImage() {
+    _profileImage = null;
+  }
 }
