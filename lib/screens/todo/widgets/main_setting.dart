@@ -36,6 +36,7 @@ class _MainSettingState extends State<MainSetting> {
         ];
       },
       icon: Icon(Icons.more_horiz),
+      color: Colors.white,
     );
   }
 }

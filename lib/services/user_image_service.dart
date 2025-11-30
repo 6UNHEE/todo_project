@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:todo_project/utils/logger.dart';
 
 /// 프로필 사진 관련 Service
 class UserImageService {
