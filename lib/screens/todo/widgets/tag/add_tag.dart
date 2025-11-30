@@ -54,8 +54,6 @@ class AddTag extends StatelessWidget {
                         tagName = ''; // 중복안되게 처리
 
                         tagList.addTag(tag: newTag);
-
-                        await tagList.saveTag(tag: newTag);
                       },
                       child: Text('완료'),
                     ),

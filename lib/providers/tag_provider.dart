@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:todo_project/models/tag_model.dart';
 import 'package:todo_project/services/tag_service.dart';
-import 'package:todo_project/utils/logger.dart';
 
 final tagServiceProvider = Provider<TagService>((ref) => TagService());
 
@@ -39,12 +38,5 @@ class TagNotifier extends StateNotifier<List<TagModel>> {
   void updateTag({required int id, required String newName}) {
     _tagService.updateTag(newName: newName);
     state = [..._tagService.tagList];
-  }
-
-  /// Tag 모델 저장
-  Future<void> saveTag({required TagModel tag}) async {
-    logger.d('저장한 태그 모델: $tag');
-    logger.d('저장되어있는 태그 모델: $state');
-    await _tagService.saveTag(tag: tag);
   }
 }

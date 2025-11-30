@@ -62,7 +62,7 @@ class TagList extends ConsumerWidget {
       leading: Icon(Icons.sell_outlined),
       trailing: IconButton(
         onPressed: () {
-          //ref.read(tagProvider.notifier).removeTag(index: index);
+          ref.read(tagProvider.notifier).removeTag(index: index);
         },
         icon: Icon(Icons.delete),
       ),
