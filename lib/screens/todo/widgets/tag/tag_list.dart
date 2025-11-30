@@ -15,6 +15,7 @@ class TagList extends ConsumerWidget {
     final newTagNameKey = GlobalKey<FormState>();
 
     final tagList = ref.read(tagProvider);
+    final tagP = ref.read(tagProvider.notifier);
 
     return ListTile(
       onTap: () {
@@ -31,9 +32,9 @@ class TagList extends ConsumerWidget {
                   name = value;
                 },
                 validate: (value) {
-                  // if (tagPro.isDuplicate(name)) {
-                  //   return '중복된 태그 입니다.';
-                  // }
+                  if (tagP.isDuplicate(name: name)) {
+                    return '중복된 태그 입니다.';
+                  }
                   return null;
                 },
               ),
@@ -49,7 +50,9 @@ class TagList extends ConsumerWidget {
                     if (name.isEmpty) return;
                     if (!(newTagNameKey.currentState!.validate())) return;
 
-                    //tagPro.updateTag(id: tagList[index].id, newName: name);
+                    tagP.updateTag(id: tagList[index].id, newName: name);
+
+                    name = ''; // 중복안되게 처리
                   },
                   child: Text('완료'),
                 ),

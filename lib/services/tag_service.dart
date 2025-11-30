@@ -37,9 +37,10 @@ class TagService {
   }
 
   /// 태그 수정
-  void updateTag({required String newName}) async {
+  void updateTag({required int id, required String newName}) async {
     if (isDuplicate(name: newName)) return;
-    final index = _tagList.indexWhere((tag) => tag.name == newName);
+
+    final index = _tagList.indexWhere((tag) => tag.id == id);
 
     _tagList[index] = _tagList[index].copyWith(name: newName);
 
@@ -49,7 +50,7 @@ class TagService {
   /// 태그 모델 저장
   Future<void> _saveTag() async {
     // toString() 한 이유는 HiveError: Integer keys need to be in the range 0 - 0xFFFFFFFF 오류때문에
-    // key를 다르게 해줘야 덮어쓰기가 되지않음 !
+    // key를 다르게 해줘야 덮어쓰기가 되지않음!
     await _tagbox.clear();
     for (var tag in _tagList) {
       await _tagbox.put(tag.id.toString(), tag);

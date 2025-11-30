@@ -36,7 +36,7 @@ class TagNotifier extends StateNotifier<List<TagModel>> {
 
   /// Tag 수정
   void updateTag({required int id, required String newName}) {
-    _tagService.updateTag(newName: newName);
+    _tagService.updateTag(id: id, newName: newName);
     state = [..._tagService.tagList];
   }
 }
