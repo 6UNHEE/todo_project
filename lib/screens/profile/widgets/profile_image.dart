@@ -1,14 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_project/common/widgets/custom_dialog.dart';
+import 'package:todo_project/providers/user_image_provider.dart';
 import 'package:todo_project/theme/app_size.dart';
 import 'package:todo_project/theme/app_theme.dart';
 
-class ProfileImage extends StatelessWidget {
-  /// 프로필 사진 업로드 위젯
+class ProfileImage extends ConsumerWidget {
   const ProfileImage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final image = ref.watch(userImageNotifierProvider);
     return GestureDetector(
       // TODO 프로필 사진 업로드 구현, 조건 필요
       onTap: () {
@@ -17,7 +21,18 @@ class ProfileImage extends StatelessWidget {
           builder: (context) => CustomDialog(
             title: '프로필 이미지',
             actions: [
-              ElevatedButton(onPressed: () {}, child: Text('수정')),
+              ElevatedButton(
+                onPressed: () async {
+                  await ref
+                      .read(userImageNotifierProvider.notifier)
+                      .pickProfileImage();
+
+                  if (context.mounted) {
+                    Navigator.pop(context);
+                  }
+                },
+                child: Text('수정'),
+              ),
               ElevatedButton(onPressed: () {}, child: Text('삭제')),
               ElevatedButton(
                 onPressed: () => Navigator.pop(context),
@@ -30,7 +45,10 @@ class ProfileImage extends StatelessWidget {
       child: CircleAvatar(
         radius: AppSize.iconSizeL,
         backgroundColor: AppTheme.lightGray,
-        child: Icon(Icons.person, size: AppSize.iconSizeL, color: Colors.white),
+        backgroundImage: image != null ? FileImage(File(image.path)) : null,
+        child: image == null
+            ? Icon(Icons.person, size: AppSize.iconSizeL, color: Colors.white)
+            : null,
       ),
     );
   }
