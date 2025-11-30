@@ -28,6 +28,11 @@ class TodoService {
     await _saveTodo();
   }
 
+  /// 체크 박스 활성/비활성
+  void updateCheck({required int index, required bool isDone}) {
+    _todoList[index] = _todoList[index].copyWith(isDone: isDone);
+  }
+
   /// To do 모델 저장
   Future<void> _saveTodo() async {
     await _todobox.clear();

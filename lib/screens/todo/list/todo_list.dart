@@ -15,7 +15,14 @@ class TodoList extends ConsumerWidget {
         return ListTile(
           onTap: () {},
           title: Text(todoList[index].title),
-          leading: Checkbox(value: false, onChanged: (value) {}),
+          leading: Checkbox(
+            value: todoList[index].isDone ?? false,
+            onChanged: (value) {
+              ref
+                  .read(todoProvider.notifier)
+                  .updateCheck(index: index, isDone: value!);
+            },
+          ),
           trailing: TodoEditButton(index: index),
           contentPadding: EdgeInsets.zero,
           visualDensity: const VisualDensity(vertical: -4.0),

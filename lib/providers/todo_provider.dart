@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:todo_project/models/todo_model.dart';
 import 'package:todo_project/services/todo_service.dart';
+import 'package:todo_project/utils/logger.dart';
 
 // UI나 다른 코드에서 언제든 ref.read(todoServiceProvider) 하면 TodoService를 쓸 수 있게 연결
 final todoServiceProvider = Provider<TodoService>((ref) => TodoService());
@@ -30,6 +31,12 @@ class TodoNotifier extends StateNotifier<List<TodoModel>> {
   /// To do 리스트 삭제
   void deleteList({required int index}) {
     _todoService.deleteTodo(index: index);
+    state = [..._todoService.todoList];
+  }
+
+  /// 체크박스 활성/비활성화
+  void updateCheck({required int index, required bool isDone}) {
+    _todoService.updateCheck(index: index, isDone: isDone);
     state = [..._todoService.todoList];
   }
 }
