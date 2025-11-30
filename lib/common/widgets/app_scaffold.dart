@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_project/screens/todo/widgets/add_list.dart';
+import 'package:todo_project/screens/todo/list/add_list.dart';
 import 'package:todo_project/theme/app_size.dart';
 import 'package:todo_project/theme/app_theme.dart';
 

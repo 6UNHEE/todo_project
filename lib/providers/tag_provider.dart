@@ -18,6 +18,9 @@ class TagNotifier extends StateNotifier<List<TagModel>> {
     _tagService.loadTag();
   }
 
+  /// Tag 이름만 반환
+  List<String> get tagName => _tagService.tagNameList;
+
   /// 중복 검사
   bool isDuplicate({required String name}) =>
       _tagService.isDuplicate(name: name);

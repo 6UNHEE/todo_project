@@ -10,6 +10,10 @@ class TagService {
 
   List<TagModel> get tagList => _tagList;
 
+  // 태그 이름만 반환
+  List<String> get tagNameList =>
+      _tagbox.values.map((tag) => tag.name).toList();
+
   /// 앱 시작 시 전체 태그 불러오기
   void loadTag() {
     final savedTags = tag;
@@ -58,6 +62,6 @@ class TagService {
     logger.d('저장되어있는 태그: $tag');
   }
 
-  /// 저장된 태그 이름 불러오기
+  /// 저장된 태그 모델 불러오기
   List<TagModel> get tag => _tagbox.values.toList();
 }

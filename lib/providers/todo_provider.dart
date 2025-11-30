@@ -1,24 +1,26 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:todo_project/models/todo_model.dart';
+import 'package:todo_project/services/todo_service.dart';
 
-final todoProvider = StateNotifierProvider<TodoNotifier, List<TodoModel>>(
-  (ref) => TodoNotifier(),
-);
+final todoServiceProvider = Provider<TodoService>((ref) => TodoService());
 
-/// Todo 입력 관찰
-final todoTextProvider = StateProvider<String>((ref) => "");
+final todoProvider = StateNotifierProvider<TodoNotifier, List<TodoModel>>((
+  ref,
+) {
+  final service = ref.read(todoServiceProvider);
+  return TodoNotifier(service);
+});
 
 /// To do 리스트 관련 상태
 class TodoNotifier extends StateNotifier<List<TodoModel>> {
-  TodoNotifier() : super([]);
+  final TodoService _todoService;
+
+  TodoNotifier(this._todoService) : super(_todoService.todo);
 
   /// To do 리스트 추가
   void addList({required TodoModel todo}) {
-    state = [...state, todo];
-  }
-
-  /// To do 리스트 삭제
-  void removeList(int id) {
-    state = state.where((todo) => todo.id != id).toList();
+    _todoService.addTodo(todo: todo);
+    state = [..._todoService.todo];
   }
 }
