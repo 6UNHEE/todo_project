@@ -15,22 +15,27 @@ class AddList extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final editing = ref.watch(editTodoProvider);
 
-    return Container(
-      height: 150,
-      color: Colors.white,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          TodoContent(),
-          Visibility(
-            visible: editing.title.isNotEmpty,
-            child: Row(
-              spacing: AppSize.appPaddingS,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [SelectTag(), TemporayButton(), DoneButton()],
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
+      ),
+      child: Container(
+        height: 150,
+        color: Colors.white,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TodoContent(),
+            Visibility(
+              visible: editing.title.isNotEmpty,
+              child: Row(
+                spacing: AppSize.appPaddingS,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [SelectTag(), TemporayButton(), DoneButton()],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

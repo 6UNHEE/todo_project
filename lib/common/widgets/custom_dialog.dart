@@ -12,7 +12,11 @@ class CustomDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: title != null ? Text(title!, textAlign: TextAlign.center) : null,
-      titleTextStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0),
+      titleTextStyle: TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 15.0,
+        color: Colors.black,
+      ),
       content: content,
       actions: actions,
       backgroundColor: Colors.white,
