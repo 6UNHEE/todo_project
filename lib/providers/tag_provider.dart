@@ -4,43 +4,47 @@ import 'package:todo_project/models/tag_model.dart';
 import 'package:todo_project/services/tag_service.dart';
 import 'package:todo_project/utils/logger.dart';
 
-final tagProvider = StateNotifierProvider<TagNotifier, List<TagModel>>(
-  (ref) => TagNotifier(),
-);
-
 final tagServiceProvider = Provider<TagService>((ref) => TagService());
+
+final tagProvider = StateNotifierProvider<TagNotifier, List<TagModel>>((ref) {
+  final service = ref.read(tagServiceProvider);
+  return TagNotifier(service);
+});
 
 /// Tag 관련 상태
 class TagNotifier extends StateNotifier<List<TagModel>> {
-  TagNotifier() : super([]);
+  final TagService _tagService;
 
-  // 중복 검사 메소드
-  bool isDuplicate(String name) {
-    return state.any((tag) => tag.name == name);
+  TagNotifier(this._tagService) : super(_tagService.tag) {
+    _tagService.loadTag();
   }
+
+  /// 중복 검사
+  bool isDuplicate({required String name}) =>
+      _tagService.isDuplicate(name: name);
 
   /// Tag 추가
   void addTag({required TagModel tag}) {
-    if (!isDuplicate(tag.name)) {
-      state = [...state, tag];
-    }
+    _tagService.addTag(tag: tag);
+    state = [..._tagService.tagList];
   }
 
   /// Tag 삭제
   void removeTag({required int index}) {
-    final newList = [...state];
-    newList.removeAt(index);
-    state = newList;
+    _tagService.removeTag(index: index);
+    state = [..._tagService.tagList];
   }
 
   /// Tag 수정
   void updateTag({required int id, required String newName}) {
-    if (!isDuplicate(newName)) {
-      state = state
-          .map((tag) => tag.id == id ? tag.copyWith(name: newName) : tag)
-          .toList();
+    _tagService.updateTag(newName: newName);
+    state = [..._tagService.tagList];
+  }
 
-      logger.d(state);
-    }
+  /// Tag 모델 저장
+  Future<void> saveTag({required TagModel tag}) async {
+    logger.d('저장한 태그 모델: $tag');
+    logger.d('저장되어있는 태그 모델: $state');
+    await _tagService.saveTag(tag: tag);
   }
 }

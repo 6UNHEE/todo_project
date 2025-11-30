@@ -1,8 +1,13 @@
-/// Tag 모델
-///
-/// id, name
-class TagModel {
+import 'package:hive/hive.dart';
+
+part 'tag_model.g.dart';
+
+@HiveType(typeId: 1)
+class TagModel extends HiveObject {
+  @HiveField(0)
   final int id;
+
+  @HiveField(1)
   final String name;
 
   TagModel({required this.id, required this.name});
@@ -13,6 +18,6 @@ class TagModel {
 
   @override
   String toString() {
-    return 'TagModel(id: $id, name: $name)';
+    return 'TodoModel(id: $id, name: $name)';
   }
 }

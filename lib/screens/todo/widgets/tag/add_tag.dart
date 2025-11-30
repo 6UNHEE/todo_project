@@ -21,17 +21,17 @@ class AddTag extends StatelessWidget {
             return Consumer(
               builder: (context, ref, child) {
                 final tagList = ref.read(tagProvider.notifier);
-                String name = '';
+                String tagName = '';
                 return CustomDialog(
                   title: '태그 추가',
                   content: CustomTextField(
                     globalKey: tagNameKey,
                     onChanged: (value) {
-                      name = value;
+                      tagName = value;
                     },
                     validate: (value) {
-                      if (tagList.isDuplicate(name)) {
-                        return '중복된 태그 입니다.';
+                      if (tagList.isDuplicate(name: tagName)) {
+                        return '중복된 태그 입니다';
                       }
                       return null;
                     },
@@ -42,16 +42,20 @@ class AddTag extends StatelessWidget {
                       child: Text('취소'),
                     ),
                     ElevatedButton(
-                      onPressed: () {
-                        if (name.isEmpty) return;
+                      onPressed: () async {
+                        if (tagName.isEmpty) return;
                         if (!(tagNameKey.currentState!.validate())) return;
 
                         final newTag = TagModel(
                           id: DateTime.now().millisecondsSinceEpoch,
-                          name: name,
+                          name: tagName,
                         );
 
+                        tagName = ''; // 중복안되게 처리
+
                         tagList.addTag(tag: newTag);
+
+                        await tagList.saveTag(tag: newTag);
                       },
                       child: Text('완료'),
                     ),
