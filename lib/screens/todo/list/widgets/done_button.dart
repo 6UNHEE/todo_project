@@ -1,22 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_project/models/todo_model.dart';
+import 'package:todo_project/providers/edit_todo_provider.dart';
+import 'package:todo_project/providers/todo_provider.dart';
 
-class DoneButton extends StatelessWidget {
+class DoneButton extends ConsumerWidget {
   /// 완료 버튼
   const DoneButton({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final editTodo = ref.read(editTodoProvider);
+    final doneTodo = ref.read(todoProvider.notifier);
+
     return TextButton(
       onPressed: () {
         final now = DateTime.now();
-        // final newTodo = TodoModel(
-        //   id: now.millisecondsSinceEpoch,
-        //   title: todoText,
-        //   tag: null,
-        //   createdAt: now.toIso8601String(),
-        //   updatedAt: null,
-        // );
-        // ref.read(todoProvider.notifier).addList(todo: newTodo);
+
+        final addTodo = TodoModel(
+          id: now.millisecondsSinceEpoch,
+          title: editTodo.title,
+          createdAt: now.toIso8601String(),
+        );
+
+        doneTodo.addList(todo: addTodo);
         Navigator.pop(context);
       },
       child: Text('완료'),
