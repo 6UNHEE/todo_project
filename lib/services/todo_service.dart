@@ -28,6 +28,20 @@ class TodoService {
     await _saveTodo();
   }
 
+  /// To do 검색
+  List<TodoModel> searchTodo({required String input}) {
+    final query = input.trim();
+
+    final searchList = _todoList.where((todo) {
+      final titleLower = todo.title.toLowerCase();
+      return query
+          .split('')
+          .any((char) => titleLower.contains(char.toLowerCase()));
+    }).toList();
+
+    return searchList;
+  }
+
   /// 체크 박스 활성/비활성
   void updateCheck({required int index, required bool isDone}) {
     _todoList[index] = _todoList[index].copyWith(isDone: isDone);
