@@ -16,7 +16,7 @@ class TodoList extends ConsumerWidget {
           onTap: () {},
           title: Text(todoList[index].title),
           leading: Checkbox(value: false, onChanged: (value) {}),
-          trailing: TodoEditButton(),
+          trailing: TodoEditButton(index: index),
           contentPadding: EdgeInsets.zero,
           visualDensity: const VisualDensity(vertical: -4.0),
         );

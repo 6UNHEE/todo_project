@@ -29,7 +29,6 @@ class TagService {
   /// 태그 추가
   void addTag({required TagModel tag}) async {
     if (isDuplicate(name: tag.name)) return;
-
     _tagList.add(tag);
     await _saveTag();
   }

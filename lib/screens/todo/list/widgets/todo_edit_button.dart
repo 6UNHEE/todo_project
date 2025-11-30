@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_project/common/widgets/custom_dialog.dart';
+import 'package:todo_project/providers/todo_provider.dart';
 import 'package:todo_project/theme/app_size.dart';
 
 class TodoEditButton extends StatelessWidget {
+  final int index;
+
   /// 메모 수정/삭제 위젯
-  const TodoEditButton({super.key});
+  const TodoEditButton({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +26,19 @@ class TodoEditButton extends StatelessWidget {
                   label: const Text('메모 수정'),
                   icon: const Icon(Icons.delete),
                 ),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    //list.removeAt(index);
-                    Navigator.pop(context);
+                Consumer(
+                  builder: (context, ref, child) {
+                    return ElevatedButton.icon(
+                      onPressed: () {
+                        ref
+                            .read(todoProvider.notifier)
+                            .deleteList(index: index);
+                        Navigator.pop(context);
+                      },
+                      label: const Text('메모 삭제'),
+                      icon: const Icon(Icons.edit),
+                    );
                   },
-                  label: const Text('메모 삭제'),
-                  icon: const Icon(Icons.edit),
                 ),
               ],
             ),

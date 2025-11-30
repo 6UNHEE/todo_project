@@ -22,6 +22,12 @@ class TodoService {
     await _saveTodo();
   }
 
+  /// To do 삭제
+  void deleteTodo({required int index}) async {
+    _todoList.removeAt(index);
+    await _saveTodo();
+  }
+
   /// To do 모델 저장
   Future<void> _saveTodo() async {
     await _todobox.clear();
