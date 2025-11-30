@@ -53,7 +53,7 @@ class ProfileImage extends ConsumerWidget {
       child: CircleAvatar(
         radius: AppSize.iconSizeL,
         backgroundColor: AppTheme.lightGray,
-        backgroundImage: image != null ? FileImage(File(image.path)) : null,
+        backgroundImage: image != null ? FileImage(File(image)) : null,
         child: image == null
             ? Icon(Icons.person, size: AppSize.iconSizeL, color: Colors.white)
             : null,

@@ -21,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
       isMainScreen: true,
       actions: [MainSetting()],
       child: Column(
-        spacing: AppSize.appPaddingS,
+        spacing: AppSize.appPaddingM,
         children: [
           ProfileInfo(),
           SearchList(),
