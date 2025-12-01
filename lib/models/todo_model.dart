@@ -21,7 +21,7 @@ class TodoModel {
   final String? updatedAt;
 
   @HiveField(5)
-  final bool? isDone;
+  final bool isDone;
 
   TodoModel({
     required this.id,
@@ -29,7 +29,7 @@ class TodoModel {
     this.tag,
     required this.createdAt,
     this.updatedAt,
-    this.isDone,
+    required this.isDone,
   });
 
   TodoModel copyWith({

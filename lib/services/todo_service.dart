@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:todo_project/enums/todo_status_enum.dart';
 import 'package:todo_project/models/todo_model.dart';
 
 /// To do 관련 Service
@@ -45,6 +46,18 @@ class TodoService {
   /// 체크 박스 활성/비활성
   void updateCheck({required int index, required bool isDone}) {
     _todoList[index] = _todoList[index].copyWith(isDone: isDone);
+  }
+
+  /// 필터된 Todo 반환
+  List<TodoModel> filterTodo({required TodoStatusEnum status}) {
+    switch (status) {
+      case TodoStatusEnum.all:
+        return _todoList;
+      case TodoStatusEnum.completed:
+        return _todoList.where((todo) => todo.isDone).toList();
+      case TodoStatusEnum.incompleted:
+        return _todoList.where((todo) => !todo.isDone).toList();
+    }
   }
 
   /// To do 모델 저장

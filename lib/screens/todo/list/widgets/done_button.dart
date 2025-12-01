@@ -21,6 +21,7 @@ class DoneButton extends ConsumerWidget {
           id: now.millisecondsSinceEpoch,
           title: editTodo.title,
           createdAt: now.toIso8601String(),
+          isDone: false,
         );
 
         doneTodo.addList(todo: addTodo);

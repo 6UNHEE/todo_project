@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_project/screens/todo/widgets/filter_setting.dart';
+import 'package:todo_project/screens/todo/filter/filter_setting.dart';
 import 'package:todo_project/screens/todo/tag/tag_setting.dart';
 
 class MainSetting extends StatefulWidget {

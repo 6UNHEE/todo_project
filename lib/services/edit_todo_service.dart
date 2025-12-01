@@ -6,6 +6,7 @@ class EditTodoService {
     id: DateTime.now().millisecondsSinceEpoch,
     title: '',
     createdAt: DateTime.now().toIso8601String(),
+    isDone: false,
   );
 
   TodoModel get editTodo => _editTodo;

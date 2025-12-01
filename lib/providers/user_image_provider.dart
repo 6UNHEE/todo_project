@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:todo_project/services/user_image_service.dart';
+import 'package:todo_project/utils/logger.dart';
 
 final userImageServiceProvider = Provider<UserImageService>(
   (ref) => UserImageService(),
@@ -25,6 +26,7 @@ class UserImageNotifier extends StateNotifier<String?> {
     if (_service.profileImage != null) {
       state = _service.profileImage!.path;
     }
+    logger.d('프로필 사진 등록');
   }
 
   /// 프로필 사진 삭제
