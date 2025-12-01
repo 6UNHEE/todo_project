@@ -19,7 +19,7 @@ class TodoModelAdapter extends TypeAdapter<TodoModel> {
     return TodoModel(
       id: fields[0] as int,
       title: fields[1] as String,
-      tag: (fields[2] as List?)?.cast<TagModel>(),
+      tag: (fields[2] as List).cast<TagModel>(),
       createdAt: fields[3] as String,
       updatedAt: fields[4] as String?,
       isDone: fields[5] as bool,

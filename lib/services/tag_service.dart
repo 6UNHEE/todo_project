@@ -6,9 +6,8 @@ import 'package:todo_project/utils/logger.dart';
 class TagService {
   final _tagbox = Hive.box<TagModel>("tagbox");
 
-  // 태그 이름만 반환
-  List<String> get tagNameList =>
-      _tagbox.values.map((tag) => tag.name).toList();
+  /// 저장된 TagModel 반환
+  List<TagModel> get tagList => _tagbox.values.toList();
 
   /// 앱 시작 시 저장된 태그 불러오기
   Future<List<TagModel>> loadTag() async {

@@ -20,6 +20,7 @@ class DoneButton extends ConsumerWidget {
         final addTodo = TodoModel(
           id: now.millisecondsSinceEpoch,
           title: editTodo.title,
+          tag: [],
           createdAt: now.toIso8601String(),
           isDone: false,
         );

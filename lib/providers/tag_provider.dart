@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:todo_project/models/tag_model.dart';
+import 'package:todo_project/screens/todo/tag/tag_list.dart';
 import 'package:todo_project/services/tag_service.dart';
 
 final tagServiceProvider = Provider<TagService>((ref) => TagService());
@@ -18,8 +19,8 @@ class TagNotifier extends StateNotifier<List<TagModel>> {
     loadTag();
   }
 
-  /// Tag 이름만 반환
-  List<String> get tagName => _tagService.tagNameList;
+  /// 저장된 Tag 반환
+  List<TagModel> get tagList => _tagService.tagList;
 
   /// 앱 시작 시 Tag list 불러오기
   Future<void> loadTag() async {

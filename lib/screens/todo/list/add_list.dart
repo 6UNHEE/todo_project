@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_project/providers/edit_todo_provider.dart';
 import 'package:todo_project/screens/todo/list/widgets/done_button.dart';
 import 'package:todo_project/screens/todo/list/widgets/select_tag.dart';
+import 'package:todo_project/screens/todo/list/widgets/selected_tag.dart';
 import 'package:todo_project/screens/todo/list/widgets/temporay_button.dart';
 import 'package:todo_project/screens/todo/list/widgets/todo_content.dart';
 import 'package:todo_project/theme/app_size.dart';
@@ -20,7 +21,7 @@ class AddList extends ConsumerWidget {
         bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
       child: Container(
-        height: 150,
+        height: 200,
         color: Colors.white,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -31,7 +32,13 @@ class AddList extends ConsumerWidget {
               child: Row(
                 spacing: AppSize.appPaddingS,
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [SelectTag(), TemporayButton(), DoneButton()],
+                children: [
+                  SizedBox(width: 16.0), // textbutton 패딩이랑 비슷하게 주기
+                  Expanded(child: SelectedTag()),
+                  SelectTag(),
+                  TemporayButton(),
+                  DoneButton(),
+                ],
               ),
             ),
           ],

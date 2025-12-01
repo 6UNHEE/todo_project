@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_project/providers/edit_todo_provider.dart';
 import 'package:todo_project/providers/tag_provider.dart';
 
 class SelectTag extends ConsumerWidget {
@@ -8,13 +9,21 @@ class SelectTag extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tagList = ref.read(tagProvider.notifier);
+    final tagList = ref.read(tagProvider);
+
     return PopupMenuButton(
       color: Colors.white,
       icon: Icon(Icons.sell),
       itemBuilder: (context) {
-        return tagList.tagName
-            .map((tag) => PopupMenuItem(onTap: () {}, child: Text(tag)))
+        return tagList
+            .map(
+              (tag) => PopupMenuItem(
+                onTap: () {
+                  ref.read(editTodoProvider.notifier).addTag(tag: tag);
+                },
+                child: Text(tag.name),
+              ),
+            )
             .toList();
       },
     );

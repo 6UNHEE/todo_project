@@ -1,26 +1,44 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
+import 'package:todo_project/models/tag_model.dart';
 import 'package:todo_project/models/todo_model.dart';
-import 'package:todo_project/services/edit_todo_service.dart';
+import 'package:todo_project/utils/logger.dart';
 
-final editService = Provider<EditTodoService>((ref) => EditTodoService());
+final editTodoProvider = StateNotifierProvider<EditTodoNotifier, TodoModel>(
+  (ref) => EditTodoNotifier(),
+);
 
-final editTodoProvider = StateNotifierProvider<EditTodoNotifier, TodoModel>((
-  ref,
-) {
-  final service = ref.read(editService);
-  return EditTodoNotifier(service);
-});
-
-/// 임시 저장 상태 관리
+/// To do list 입력중인 상태 관리
 class EditTodoNotifier extends StateNotifier<TodoModel> {
-  final EditTodoService _editTodoService;
+  EditTodoNotifier()
+    : super(
+        TodoModel(
+          id: DateTime.now().millisecondsSinceEpoch,
+          title: '',
+          tag: [],
+          createdAt: DateTime.now().toIso8601String(),
+          isDone: false,
+        ),
+      );
 
-  EditTodoNotifier(this._editTodoService) : super(_editTodoService.editTodo);
-
-  /// 임시저장 타이틀 관찰
+  /// 입력중인 타이틀 관찰
   void updateTitle({required String title}) {
-    _editTodoService.updateTitle(title: title);
-    state = _editTodoService.editTodo;
+    state = state.copyWith(title: title);
+  }
+
+  /// 입력중인 태그 추가
+  void addTag({required TagModel tag}) {
+    final List<TagModel> updatedList = List.from(state.tag);
+    if (updatedList.contains(tag)) return;
+    updatedList.add(tag);
+    state = state.copyWith(tag: updatedList);
+    logger.d('선택된 태그: $updatedList');
+  }
+
+  /// 입력중인 태그 삭제
+  void deleteTag({required TagModel tag}) {
+    final List<TagModel> tagList = List.from(state.tag);
+    tagList.remove(tag);
+    state = state.copyWith(tag: tagList);
+    logger.d('삭제한 태그: $tag');
   }
 }

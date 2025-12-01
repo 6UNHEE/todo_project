@@ -12,7 +12,7 @@ class TodoModel {
   final String title;
 
   @HiveField(2)
-  final List<TagModel>? tag;
+  final List<TagModel> tag;
 
   @HiveField(3)
   final String createdAt;
@@ -26,7 +26,7 @@ class TodoModel {
   TodoModel({
     required this.id,
     required this.title,
-    this.tag,
+    required this.tag,
     required this.createdAt,
     this.updatedAt,
     required this.isDone,
