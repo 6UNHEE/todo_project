@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_project/providers/filtered_todo_provider.dart';
 import 'package:todo_project/providers/todo_provider.dart';
+import 'package:todo_project/screens/todo/list/todo_detail.dart';
 import 'package:todo_project/screens/todo/list/widgets/todo_edit_button.dart';
 import 'package:todo_project/theme/app_size.dart';
 
@@ -14,7 +15,14 @@ class TodoList extends ConsumerWidget {
     return ListView.separated(
       itemBuilder: (context, index) {
         return ListTile(
-          onTap: () {},
+          onTap: () {
+            showModalBottomSheet(
+              context: context,
+              builder: (context) {
+                return TodoDetail(index: index);
+              },
+            );
+          },
           title: Text(todoList[index].title),
           leading: Checkbox(
             value: todoList[index].isDone,

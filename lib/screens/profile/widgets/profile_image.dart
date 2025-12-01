@@ -13,6 +13,7 @@ class ProfileImage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final image = ref.watch(userImageNotifierProvider);
+
     return GestureDetector(
       onTap: () {
         showDialog(

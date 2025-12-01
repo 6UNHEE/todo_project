@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_project/models/todo_model.dart';
 import 'package:todo_project/providers/edit_todo_provider.dart';
+import 'package:todo_project/providers/todo_image_provider.dart';
 import 'package:todo_project/providers/todo_provider.dart';
 
 class DoneButton extends ConsumerWidget {
@@ -12,10 +13,20 @@ class DoneButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final editTodo = ref.read(editTodoProvider);
     final doneTodo = ref.read(todoProvider.notifier);
+    final image = ref.watch(todoImageNotifierProvider);
 
     return TextButton(
       onPressed: () {
         final now = DateTime.now();
+
+        final nowToString = now.toString();
+        final last4 = now.toString().substring(nowToString.length - 4);
+
+        if (image != null) {
+          ref
+              .read(todoImageNotifierProvider.notifier)
+              .saveImage(originPath: image, fileName: 'todo$last4.png');
+        }
 
         final addTodo = TodoModel(
           id: now.millisecondsSinceEpoch,
@@ -23,10 +34,12 @@ class DoneButton extends ConsumerWidget {
           tag: editTodo.tag,
           createdAt: now.toIso8601String(),
           isDone: false,
+          imagePath: image,
         );
 
         doneTodo.addList(todo: addTodo);
         ref.read(editTodoProvider.notifier).resetModel();
+        ref.read(todoImageNotifierProvider.notifier).cancelImage();
         Navigator.pop(context);
       },
       child: Text('완료'),

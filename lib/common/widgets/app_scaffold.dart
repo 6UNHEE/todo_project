@@ -29,7 +29,12 @@ class AppScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: title, centerTitle: true, actions: actions),
+      appBar: AppBar(
+        title: title,
+        centerTitle: true,
+        actions: actions,
+        scrolledUnderElevation: 0.0,
+      ),
       floatingActionButton: (isMainScreen ?? false)
           ? FloatingActionButton(
               onPressed: () {
@@ -49,7 +54,10 @@ class AppScaffold extends StatelessWidget {
           : null,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: AppSize.appPaddingM),
+          padding: EdgeInsets.symmetric(
+            horizontal: AppSize.appPaddingM,
+            vertical: AppSize.appPaddingM,
+          ),
           child: child,
         ),
       ),

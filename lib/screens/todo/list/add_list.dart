@@ -6,6 +6,8 @@ import 'package:todo_project/screens/todo/list/widgets/select_tag.dart';
 import 'package:todo_project/screens/todo/list/widgets/selected_tag.dart';
 import 'package:todo_project/screens/todo/list/widgets/temporay_button.dart';
 import 'package:todo_project/screens/todo/list/widgets/todo_content.dart';
+import 'package:todo_project/screens/todo/list/widgets/todo_image.dart';
+import 'package:todo_project/screens/todo/list/widgets/upload_image.dart';
 import 'package:todo_project/theme/app_size.dart';
 
 class AddList extends ConsumerWidget {
@@ -29,15 +31,24 @@ class AddList extends ConsumerWidget {
             TodoContent(),
             Visibility(
               visible: editing.title.isNotEmpty,
-              child: Row(
-                spacing: AppSize.appPaddingS,
-                mainAxisAlignment: MainAxisAlignment.end,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(width: 16.0), // textbutton 패딩이랑 비슷하게 주기
-                  Expanded(child: SelectedTag()),
-                  SelectTag(),
-                  TemporayButton(),
-                  DoneButton(),
+                  TodoImage(),
+                  Row(
+                    spacing: AppSize.appPaddingS,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SizedBox(
+                        width: AppSize.appPaddingS,
+                      ), // textbutton 패딩이랑 비슷하게 주기
+                      Expanded(child: SelectedTag()),
+                      UploadImage(),
+                      SelectTag(),
+                      TemporayButton(),
+                      DoneButton(),
+                    ],
+                  ),
                 ],
               ),
             ),

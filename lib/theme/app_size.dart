@@ -2,7 +2,7 @@
 class AppSize {
   // ========padding, borderRadius 값========
   /// 여백 S
-  static const appPaddingS = 10.0;
+  static const appPaddingS = 16.0;
 
   /// 여백 M
   static const appPaddingM = 30.0;
@@ -20,4 +20,7 @@ class AppSize {
   /// 아이콘 크기
   static const iconSizeS = 30.0;
   static const iconSizeL = 40.0;
+
+  /// 이미지 크기
+  static const imageSize = 70.0;
 }

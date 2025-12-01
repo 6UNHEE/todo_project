@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_project/providers/edit_todo_provider.dart';
+import 'package:todo_project/theme/app_size.dart';
 
 class TodoContent extends ConsumerWidget {
   /// 할 일 입력
@@ -18,7 +19,7 @@ class TodoContent extends ConsumerWidget {
       decoration: InputDecoration(
         border: InputBorder.none,
         hintText: '할 일 입력',
-        contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
+        contentPadding: EdgeInsets.symmetric(horizontal: AppSize.appPaddingS),
       ),
     );
   }

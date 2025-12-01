@@ -3,9 +3,10 @@ import 'package:todo_project/models/tag_model.dart';
 import 'package:todo_project/models/todo_model.dart';
 import 'package:todo_project/utils/logger.dart';
 
-final editTodoProvider = StateNotifierProvider<EditTodoNotifier, TodoModel>(
-  (ref) => EditTodoNotifier(),
-);
+final editTodoProvider =
+    StateNotifierProvider.autoDispose<EditTodoNotifier, TodoModel>(
+      (ref) => EditTodoNotifier(),
+    );
 
 /// To do list 입력중인 상태 관리
 class EditTodoNotifier extends StateNotifier<TodoModel> {

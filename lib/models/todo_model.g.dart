@@ -19,17 +19,18 @@ class TodoModelAdapter extends TypeAdapter<TodoModel> {
     return TodoModel(
       id: fields[0] as int,
       title: fields[1] as String,
-      tag: (fields[2] as List).cast<TagModel>(),
+      tag: (fields[2] as List?)?.cast<TagModel>(),
       createdAt: fields[3] as String,
       updatedAt: fields[4] as String?,
       isDone: fields[5] as bool,
+      imagePath: fields[6] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, TodoModel obj) {
     writer
-      ..writeByte(6)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -41,7 +42,9 @@ class TodoModelAdapter extends TypeAdapter<TodoModel> {
       ..writeByte(4)
       ..write(obj.updatedAt)
       ..writeByte(5)
-      ..write(obj.isDone);
+      ..write(obj.isDone)
+      ..writeByte(6)
+      ..write(obj.imagePath);
   }
 
   @override
