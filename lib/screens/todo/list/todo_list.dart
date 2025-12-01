@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_project/providers/filtered_todo_provider.dart';
 import 'package:todo_project/providers/todo_provider.dart';
 import 'package:todo_project/screens/todo/list/widgets/todo_edit_button.dart';
 import 'package:todo_project/theme/app_size.dart';
@@ -9,21 +10,21 @@ class TodoList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final todoList = ref.watch(todoProvider);
+    final todoList = ref.watch(filteredTodoProvider);
     return ListView.separated(
       itemBuilder: (context, index) {
         return ListTile(
           onTap: () {},
           title: Text(todoList[index].title),
           leading: Checkbox(
-            value: todoList[index].isDone ?? false,
+            value: todoList[index].isDone,
             onChanged: (value) {
               ref
                   .read(todoProvider.notifier)
-                  .updateCheck(index: index, isDone: value!);
+                  .toggleCheck(index: index, isDone: value!);
             },
           ),
-          trailing: TodoEditButton(index: index),
+          trailing: TodoEditButton(id: todoList[index].id),
           contentPadding: EdgeInsets.zero,
           visualDensity: const VisualDensity(vertical: -4.0),
         );

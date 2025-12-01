@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_project/providers/todo_provider.dart';
+import 'package:todo_project/providers/search_provider.dart';
 import 'package:todo_project/theme/app_theme.dart';
 
 class SearchList extends ConsumerWidget {
@@ -13,7 +13,7 @@ class SearchList extends ConsumerWidget {
       height: 40.0,
       child: TextFormField(
         onFieldSubmitted: (value) {
-          ref.read(todoProvider.notifier).searchList(input: value);
+          ref.read(searchProvider.notifier).state = value;
         },
         decoration: InputDecoration(
           fillColor: AppTheme.lightGray,

@@ -14,37 +14,37 @@ final todoProvider = StateNotifierProvider<TodoNotifier, List<TodoModel>>((
 });
 
 /// To do 리스트 관련 상태
+///
+/// 추가 / 삭제 / 수정 기능 담당
 class TodoNotifier extends StateNotifier<List<TodoModel>> {
   final TodoService _todoService;
 
-  TodoNotifier(this._todoService) : super(_todoService.todo) {
-    _todoService.loadTodo();
+  TodoNotifier(this._todoService) : super([]) {
+    loadTodo();
+  }
+
+  /// 앱 시작시 To do list 불러오기
+  void loadTodo() async {
+    state = await _todoService.loadTodo();
   }
 
   /// To do 리스트 추가
-  void addList({required TodoModel todo}) {
-    _todoService.addTodo(todo: todo);
-    state = [..._todoService.todoList];
+  Future<void> addList({required TodoModel todo}) async {
+    state = [...state, todo];
+    await _todoService.saveTodo(todo: todo);
   }
 
   /// To do 리스트 삭제
-  void deleteList({required int index}) {
-    _todoService.deleteTodo(index: index);
-    state = [..._todoService.todoList];
-  }
-
-  /// To do 리스트 검색
-  void searchList({required String input}) {
-    if (input.isEmpty) {
-      state = [..._todoService.todoList];
-      return;
-    }
-    state = _todoService.searchTodo(input: input);
+  Future<void> deleteList({required int id}) async {
+    state = state.where((todo) => todo.id != id).toList();
+    await _todoService.deleteTodo(id: id.toString());
   }
 
   /// 체크박스 활성/비활성화
-  void updateCheck({required int index, required bool isDone}) {
-    _todoService.updateCheck(index: index, isDone: isDone);
-    state = [..._todoService.todoList];
+  void toggleCheck({required int index, required bool isDone}) async {
+    final newList = [...state];
+    newList[index] = newList[index].copyWith(isDone: isDone);
+    state = newList;
+    await _todoService.saveTodo(todo: state[index]);
   }
 }

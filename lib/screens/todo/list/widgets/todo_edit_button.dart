@@ -5,10 +5,10 @@ import 'package:todo_project/providers/todo_provider.dart';
 import 'package:todo_project/theme/app_size.dart';
 
 class TodoEditButton extends StatelessWidget {
-  final int index;
+  final int id;
 
   /// 메모 수정/삭제 위젯
-  const TodoEditButton({super.key, required this.index});
+  const TodoEditButton({super.key, required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +30,7 @@ class TodoEditButton extends StatelessWidget {
                   builder: (context, ref, child) {
                     return ElevatedButton.icon(
                       onPressed: () {
-                        ref
-                            .read(todoProvider.notifier)
-                            .deleteList(index: index);
+                        ref.read(todoProvider.notifier).deleteList(id: id);
                         Navigator.pop(context);
                       },
                       label: const Text('메모 삭제'),

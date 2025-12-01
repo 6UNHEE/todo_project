@@ -50,7 +50,11 @@ class TagList extends ConsumerWidget {
                     if (name.isEmpty) return;
                     if (!(newTagNameKey.currentState!.validate())) return;
 
-                    tagP.updateTag(id: tagList[index].id, newName: name);
+                    tagP.updateTag(
+                      index: index,
+                      id: tagList[index].id,
+                      newName: name,
+                    );
 
                     name = ''; // 중복안되게 처리
                   },
@@ -65,7 +69,7 @@ class TagList extends ConsumerWidget {
       leading: Icon(Icons.sell_outlined),
       trailing: IconButton(
         onPressed: () {
-          ref.read(tagProvider.notifier).removeTag(index: index);
+          ref.read(tagProvider.notifier).removeTag(id: tagList[index].id);
         },
         icon: Icon(Icons.delete),
       ),
