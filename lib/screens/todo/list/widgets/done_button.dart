@@ -26,6 +26,7 @@ class DoneButton extends ConsumerWidget {
         );
 
         doneTodo.addList(todo: addTodo);
+        ref.read(editTodoProvider.notifier).resetModel();
         Navigator.pop(context);
       },
       child: Text('완료'),

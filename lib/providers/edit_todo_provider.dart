@@ -11,14 +11,16 @@ final editTodoProvider = StateNotifierProvider<EditTodoNotifier, TodoModel>(
 class EditTodoNotifier extends StateNotifier<TodoModel> {
   EditTodoNotifier()
     : super(
-        TodoModel(
-          id: DateTime.now().millisecondsSinceEpoch,
-          title: '',
-          tag: [],
-          createdAt: DateTime.now().toIso8601String(),
-          isDone: false,
-        ),
+        TodoModel(id: 0, title: '', tag: [], createdAt: '0', isDone: false),
       );
+
+  final defaultTodo = TodoModel(
+    id: 0,
+    title: '',
+    tag: [],
+    createdAt: '0',
+    isDone: false,
+  );
 
   /// 입력중인 타이틀 관찰
   void updateTitle({required String title}) {
@@ -40,5 +42,18 @@ class EditTodoNotifier extends StateNotifier<TodoModel> {
     tagList.remove(tag);
     state = state.copyWith(tag: tagList);
     logger.d('삭제한 태그: $tag');
+  }
+
+  /// 완료되면 To do model 초기화
+  void resetModel() {
+    TodoModel initTodo = TodoModel(
+      id: 0,
+      title: '',
+      tag: [],
+      createdAt: '0',
+      isDone: false,
+    );
+
+    state = initTodo;
   }
 }
