@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:todo_project/models/tag_model.dart';
-import 'package:todo_project/screens/todo/tag/tag_list.dart';
 import 'package:todo_project/services/tag_service.dart';
 
 final tagServiceProvider = Provider<TagService>((ref) => TagService());

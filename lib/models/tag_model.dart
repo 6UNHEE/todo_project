@@ -18,6 +18,6 @@ class TagModel extends HiveObject {
 
   @override
   String toString() {
-    return 'TodoModel(id: $id, name: $name)';
+    return 'TagModel(id: $id, name: $name)';
   }
 }
