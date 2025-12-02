@@ -11,7 +11,7 @@ class FilterSetting extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 120,
-      padding: EdgeInsets.symmetric(vertical: AppSize.appPaddingL),
+      padding: EdgeInsets.symmetric(vertical: AppSize.appPaddingM),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -20,7 +20,7 @@ class FilterSetting extends StatelessWidget {
         ),
       ),
       child: Column(
-        spacing: AppSize.appPaddingL,
+        spacing: AppSize.appPaddingS,
         children: [
           Text('필터 설정하기', style: TextStyle(color: AppTheme.charcoal)),
           StatusFilterChip(),

@@ -26,170 +26,180 @@ class _TodoFormState extends ConsumerState<TodoForm> {
   void initState() {
     super.initState();
     final todoList = ref.read(todoNotifierProvider);
-    ref
-        .read(editTodoNotifierProvider.notifier)
-        .loadSavedTodo(id: todoList[widget.index].id);
+    // 상태 초기 로드
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref
+          .read(editTodoNotifierProvider.notifier)
+          .loadSavedTodo(id: todoList[widget.index].id);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    final todoList = ref.watch(todoNotifierProvider);
     final scrollController = ref.watch(selectedTagScrollProvider);
     final editList = ref.watch(editTodoNotifierProvider);
 
-    return Container(
-      height: 300,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(AppSize.containerRadiusS),
-          topRight: Radius.circular(AppSize.containerRadiusS),
-        ),
+    final editNotifier = ref.read(editTodoNotifierProvider.notifier);
+
+    return Padding(
+      padding: EdgeInsets.only(
+        bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
-      child: editList == null
-          ? SizedBox.shrink()
-          : Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                //#region 체크박스
-                Checkbox(
-                  value: editList.isDone,
-                  onChanged: widget.isEditing
-                      ? (value) {
-                          ref
-                              .read(editTodoNotifierProvider.notifier)
-                              .toggleCheck(isDone: value!);
-                        }
-                      : null,
-                ),
-                //#endregion
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: AppSize.appPaddingM,
-                  ),
-                  //#region To do list 제목
-                  child: widget.isEditing
-                      ? TextFormField(
-                          onChanged: (value) {
-                            ref
-                                .read(editTodoNotifierProvider.notifier)
-                                .updateTitle(title: value);
-                          },
-                          initialValue: editList.title,
-                          maxLines: null,
-                          maxLength: 100, // 줄바꿈
-                          decoration: InputDecoration(border: InputBorder.none),
-                        )
-                      : Text(
-                          todoList[widget.index].title,
-                          style: TextStyle(fontSize: 20.0),
-                        ),
-                  //#endregion
-                ),
-
-                //#region 이미지
-                Expanded(
-                  child: editList.imagePath != null
-                      ? Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: AppSize.appPaddingM,
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(
-                              AppSize.containerRadiusS,
-                            ),
-                            child: widget.isEditing
-                                ? GestureDetector(
-                                    onTap: () {
-                                      ref
-                                          .read(
-                                            editTodoNotifierProvider.notifier,
-                                          )
-                                          .deleteImage();
-                                    },
-                                    child: Image.file(
-                                      File(editList.imagePath!),
-                                      width: AppSize.imageSizeM,
-                                      height: AppSize.imageSizeM,
-                                      fit: BoxFit.contain,
-                                    ),
-                                  )
-                                : Image.file(
-                                    File(editList.imagePath!),
-                                    width: AppSize.imageSizeM,
-                                    height: AppSize.imageSizeM,
-                                    fit: BoxFit.contain,
-                                  ),
-                          ),
-                        )
-                      : SizedBox.shrink(),
-                ),
-                //#endregion
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(AppSize.containerRadiusS),
+            topRight: Radius.circular(AppSize.containerRadiusS),
+          ),
+        ),
+        child: editList == null
+            ? const SizedBox.shrink()
+            : SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: EdgeInsets.only(left: AppSize.appPaddingM),
-                      child: CustomScrollbar(
-                        controller: scrollController,
-                        child: SingleChildScrollView(
-                          controller: scrollController,
-                          scrollDirection: Axis.horizontal,
-                          //TODO 색상 변경이 안 되는 이유??
-                          //#region 태그
-                          child: Row(
-                            spacing: AppSize.appPaddingS,
-                            children: editList.tag
-                                .map(
-                                  (tag) => InputChip(
-                                    label: Text(tag.name),
-                                    labelStyle: TextStyle(
-                                      color: AppTheme.charcoal,
-                                    ),
-                                    backgroundColor: AppTheme.lightGray,
-                                    side: BorderSide.none,
-                                    onDeleted: widget.isEditing
-                                        ? () {
-                                            ref
-                                                .read(
-                                                  editTodoNotifierProvider
-                                                      .notifier,
-                                                )
-                                                .deleteTag(tag: tag);
-                                          }
-                                        : null,
-                                  ),
-                                )
-                                .toList(),
-                          ),
-                          //#endregion
-                        ),
-                      ),
+                    //#region 체크박스
+                    Checkbox(
+                      value: editList.isDone,
+                      onChanged: widget.isEditing
+                          ? (value) {
+                              editNotifier.toggleCheck(isDone: value!);
+                            }
+                          : null,
                     ),
-                    if (widget.isEditing)
-                      Row(
-                        children: [
-                          SelectTag(),
-                          UploadImage(),
-                          TextButton(
-                            onPressed: () async {
-                              await ref
-                                  .read(editTodoNotifierProvider.notifier)
-                                  .updateModel();
-
-                              if (context.mounted) {
-                                Navigator.pop(context);
-                              }
-                            },
-                            child: Text('완료'),
-                          ),
-                        ],
+                    //#endregion
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: AppSize.appPaddingM,
                       ),
+                      //#region To do list 제목
+                      child: widget.isEditing
+                          ? TextFormField(
+                              onChanged: (value) {
+                                editNotifier.updateTitle(title: value);
+                              },
+                              initialValue: editList.title,
+                              maxLines: null,
+                              maxLength: 100,
+                              decoration: const InputDecoration(
+                                border: InputBorder.none,
+                              ),
+                            )
+                          : Text(
+                              editList.title,
+                              style: const TextStyle(fontSize: 20.0),
+                            ),
+                      //#endregion
+                    ),
+
+                    //#region 이미지
+                    SizedBox(
+                      height: editList.imagePath != null
+                          ? AppSize.imageSizeM
+                          : 0,
+                      child: editList.imagePath != null
+                          ? Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: AppSize.appPaddingM,
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(
+                                  AppSize.containerRadiusS,
+                                ),
+                                child: widget.isEditing
+                                    ? GestureDetector(
+                                        onTap: () {
+                                          editNotifier.deleteImage();
+                                        },
+                                        child: Image.file(
+                                          File(editList.imagePath!),
+                                          width: AppSize.imageSizeM,
+                                          height: AppSize.imageSizeM,
+                                          fit: BoxFit.contain,
+                                        ),
+                                      )
+                                    : Image.file(
+                                        File(editList.imagePath!),
+                                        width: AppSize.imageSizeM,
+                                        height: AppSize.imageSizeM,
+                                        fit: BoxFit.contain,
+                                      ),
+                              ),
+                            )
+                          : const SizedBox.shrink(),
+                    ),
+
+                    //#endregion
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.only(left: AppSize.appPaddingM),
+                            child: CustomScrollbar(
+                              controller: scrollController,
+                              child: SingleChildScrollView(
+                                controller: scrollController,
+                                scrollDirection: Axis.horizontal,
+
+                                //#region 태그
+                                child: Row(
+                                  children: editList.tag
+                                      .map(
+                                        (tag) => Padding(
+                                          padding: EdgeInsets.only(
+                                            right: AppSize.appPaddingS,
+                                          ),
+                                          child: InputChip(
+                                            label: Text(tag.name),
+                                            labelStyle: TextStyle(
+                                              color: AppTheme.charcoal,
+                                            ),
+                                            backgroundColor: AppTheme.lightGray,
+                                            side: BorderSide.none,
+                                            onDeleted: widget.isEditing
+                                                ? () {
+                                                    editNotifier.deleteTag(
+                                                      tag: tag,
+                                                    );
+                                                  }
+                                                : null,
+                                          ),
+                                        ),
+                                      )
+                                      .toList(),
+                                ),
+                                //#endregion
+                              ),
+                            ),
+                          ),
+                        ),
+                        if (widget.isEditing)
+                          Row(
+                            children: [
+                              SelectTag(),
+                              UploadImage(),
+                              TextButton(
+                                onPressed: () async {
+                                  await editNotifier.updateModel();
+
+                                  if (context.mounted) {
+                                    Navigator.pop(context);
+                                  }
+                                },
+                                child: const Text('완료'),
+                              ),
+                            ],
+                          ),
+                      ],
+                    ),
                   ],
                 ),
-              ],
-            ),
+              ),
+      ),
     );
   }
 }

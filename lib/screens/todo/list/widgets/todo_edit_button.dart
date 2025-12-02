@@ -4,7 +4,6 @@ import 'package:todo_project/common/widgets/custom_dialog.dart';
 import 'package:todo_project/providers/todo_provider.dart';
 import 'package:todo_project/screens/todo/list/widgets/editing_todo.dart';
 import 'package:todo_project/theme/app_size.dart';
-import 'package:todo_project/utils/logger.dart';
 
 class TodoEditButton extends StatelessWidget {
   final int id;

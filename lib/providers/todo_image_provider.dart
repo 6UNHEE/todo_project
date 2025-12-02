@@ -8,7 +8,7 @@ final todoImageServiceProvider = Provider<ImageService>(
 );
 
 final todoImageNotifierProvider =
-    StateNotifierProvider<TodoImageNotifier, String?>((ref) {
+    StateNotifierProvider.autoDispose<TodoImageNotifier, String?>((ref) {
       final service = ref.read(todoImageServiceProvider);
       return TodoImageNotifier(service);
     });
