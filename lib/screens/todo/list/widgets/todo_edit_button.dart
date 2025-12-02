@@ -18,7 +18,7 @@ class TodoEditButton extends StatelessWidget {
           context: context,
           builder: (context) => CustomDialog(
             content: Column(
-              spacing: AppSize.appPaddingM,
+              spacing: AppSize.appPaddingL,
               mainAxisSize: MainAxisSize.min,
               children: [
                 ElevatedButton.icon(

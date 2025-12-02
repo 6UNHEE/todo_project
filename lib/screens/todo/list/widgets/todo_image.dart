@@ -16,7 +16,7 @@ class TodoImage extends ConsumerWidget {
     return imagePath == null
         ? SizedBox.shrink()
         : Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppSize.appPaddingS),
+            padding: EdgeInsets.symmetric(horizontal: AppSize.appPaddingM),
             child: GestureDetector(
               onTap: () {
                 // 클릭하면 이미지 삭제

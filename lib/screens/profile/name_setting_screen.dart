@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_project/common/widgets/app_scaffold.dart';
 import 'package:todo_project/common/widgets/grey_container.dart';
 import 'package:todo_project/providers/user_name_provider.dart';
+import 'package:todo_project/theme/app_size.dart';
 
 class NameSettingScreen extends ConsumerWidget {
   /// 이름 설정
@@ -29,17 +30,23 @@ class NameSettingScreen extends ConsumerWidget {
           child: Text('확인'),
         ),
       ],
-      child: GreyContainer(
-        child: TextFormField(
-          onChanged: (value) {
-            inputName = value;
-          },
-          initialValue: name.isEmpty ? null : name,
-          maxLength: 10,
-          decoration: InputDecoration(
-            hintText: '이름 입력',
-            border: InputBorder.none,
-            counterText: '',
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: AppSize.appPaddingM,
+          vertical: AppSize.appPaddingS,
+        ),
+        child: GreyContainer(
+          child: TextFormField(
+            onChanged: (value) {
+              inputName = value;
+            },
+            initialValue: name.isEmpty ? null : name,
+            maxLength: 10,
+            decoration: InputDecoration(
+              hintText: '이름 입력',
+              border: InputBorder.none,
+              counterText: '',
+            ),
           ),
         ),
       ),

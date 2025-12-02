@@ -2,17 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:todo_project/screens/todo/filter/filter_setting.dart';
 import 'package:todo_project/screens/todo/tag/tag_setting.dart';
 
-class MainSetting extends StatefulWidget {
+class MainSetting extends StatelessWidget {
   /// Main 화면 AppBar action
   ///
   /// 태그 편집, 필터 설정
   const MainSetting({super.key});
 
-  @override
-  State<MainSetting> createState() => _MainSettingState();
-}
-
-class _MainSettingState extends State<MainSetting> {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton(

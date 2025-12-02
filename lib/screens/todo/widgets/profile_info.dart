@@ -17,40 +17,48 @@ class ProfileInfo extends ConsumerWidget {
     final name = ref.read(userNameNotifierProvider); // 사용자 이름
     final imagePath = ref.watch(userImageNotifierProvider); // 프로필 사진 저장 경로
 
-    return SizedBox(
-      height: 60.0,
-      child: Row(
-        spacing: AppSize.appPaddingS,
-        children: [
-          //#region 프로필 사진
-          CircleAvatar(
-            radius: AppSize.iconSizeL,
-            backgroundColor: AppTheme.lightGray,
-            backgroundImage: imagePath != null
-                ? FileImage(File(imagePath))
-                : null,
-            child: imagePath == null
-                ? Icon(
-                    Icons.person,
-                    size: AppSize.iconSizeL,
-                    color: Colors.white,
-                  )
-                : null,
-          ),
-          //#endregion
-
-          //#region 이름
-          Expanded(
-            child: GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => ProfileSettingScreen()),
-              ),
-              child: Text(name, style: TextStyle(fontWeight: FontWeight.bold)),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: AppSize.appPaddingS),
+      child: SizedBox(
+        height: 60.0,
+        child: Row(
+          spacing: AppSize.appPaddingS,
+          children: [
+            //#region 프로필 사진
+            CircleAvatar(
+              radius: AppSize.iconSizeL,
+              backgroundColor: AppTheme.lightGray,
+              backgroundImage: imagePath != null
+                  ? FileImage(File(imagePath))
+                  : null,
+              child: imagePath == null
+                  ? Icon(
+                      Icons.person,
+                      size: AppSize.iconSizeL,
+                      color: Colors.white,
+                    )
+                  : null,
             ),
-          ),
-          //#endregion
-        ],
+            //#endregion
+
+            //#region 이름
+            Expanded(
+              child: GestureDetector(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfileSettingScreen(),
+                  ),
+                ),
+                child: Text(
+                  name,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            //#endregion
+          ],
+        ),
       ),
     );
   }

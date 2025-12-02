@@ -45,6 +45,7 @@ class AppScaffold extends StatelessWidget {
                 showModalBottomSheet(
                   context: context,
                   builder: (context) => AddList(),
+                  isScrollControlled: true,
                 );
               },
               shape: CircleBorder(),
@@ -56,15 +57,7 @@ class AppScaffold extends StatelessWidget {
               ),
             )
           : null,
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: AppSize.appPaddingM,
-            vertical: AppSize.appPaddingS,
-          ),
-          child: child,
-        ),
-      ),
+      body: SafeArea(child: child),
     );
   }
 }

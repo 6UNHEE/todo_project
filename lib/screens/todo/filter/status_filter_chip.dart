@@ -14,7 +14,7 @@ class StatusFilterChip extends ConsumerWidget {
     final selectedStatus = ref.watch(statusNotifierProvider);
 
     return Row(
-      spacing: AppSize.appPaddingS,
+      spacing: AppSize.appPaddingL,
       mainAxisAlignment: MainAxisAlignment.center,
       children: TodoStatusEnum.values.map((status) {
         return ChoiceChip(

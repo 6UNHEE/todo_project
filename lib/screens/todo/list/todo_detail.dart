@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_project/common/widgets/custom_scrollbar.dart';
+import 'package:todo_project/providers/scroll/scroll_provider.dart';
 import 'package:todo_project/providers/todo_provider.dart';
 import 'package:todo_project/theme/app_size.dart';
 import 'package:todo_project/theme/app_theme.dart';
@@ -15,6 +17,7 @@ class TodoDetail extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final todoList = ref.read(todoNotifierProvider);
+    final scrollController = ref.watch(selectedTagScrollProvider);
 
     return Container(
       height: 300,
@@ -33,7 +36,7 @@ class TodoDetail extends ConsumerWidget {
           Checkbox(value: todoList[index].isDone, onChanged: (value) {}),
           //#endregion
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppSize.appPaddingS),
+            padding: EdgeInsets.symmetric(horizontal: AppSize.appPaddingM),
             //#region To do list 제목
             child: Text(
               todoList[index].title,
@@ -47,7 +50,7 @@ class TodoDetail extends ConsumerWidget {
             child: todoList[index].imagePath != null
                 ? Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: AppSize.appPaddingS,
+                      horizontal: AppSize.appPaddingM,
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(
@@ -65,25 +68,29 @@ class TodoDetail extends ConsumerWidget {
           ),
           //#endregion
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: AppSize.appPaddingS),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              //TODO 색상 변경이 안 되는 이유??
-              //#region 태그
-              child: Row(
-                spacing: AppSize.appPaddingS,
-                children: todoList[index].tag
-                    .map(
-                      (tag) => InputChip(
-                        label: Text(tag.name),
-                        labelStyle: TextStyle(color: AppTheme.charcoal),
-                        backgroundColor: AppTheme.lightGray,
-                        side: BorderSide.none,
-                      ),
-                    )
-                    .toList(),
+            padding: EdgeInsets.symmetric(horizontal: AppSize.appPaddingL),
+            child: CustomScrollbar(
+              controller: scrollController,
+              child: SingleChildScrollView(
+                controller: scrollController,
+                scrollDirection: Axis.horizontal,
+                //TODO 색상 변경이 안 되는 이유??
+                //#region 태그
+                child: Row(
+                  spacing: AppSize.appPaddingL,
+                  children: todoList[index].tag
+                      .map(
+                        (tag) => InputChip(
+                          label: Text(tag.name),
+                          labelStyle: TextStyle(color: AppTheme.charcoal),
+                          backgroundColor: AppTheme.lightGray,
+                          side: BorderSide.none,
+                        ),
+                      )
+                      .toList(),
+                ),
+                //#endregion
               ),
-              //#endregion
             ),
           ),
         ],

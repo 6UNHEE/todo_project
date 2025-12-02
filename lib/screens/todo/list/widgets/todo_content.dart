@@ -19,7 +19,7 @@ class TodoContent extends ConsumerWidget {
       decoration: InputDecoration(
         border: InputBorder.none,
         hintText: '할 일 입력',
-        contentPadding: EdgeInsets.symmetric(horizontal: AppSize.appPaddingS),
+        contentPadding: EdgeInsets.symmetric(horizontal: AppSize.appPaddingM),
       ),
     );
   }

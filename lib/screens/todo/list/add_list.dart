@@ -23,10 +23,10 @@ class AddList extends ConsumerWidget {
         bottom: MediaQuery.of(context).viewInsets.bottom,
       ),
       child: Container(
-        height: 200,
         color: Colors.white,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.min,
           children: [
             //#region 제목 입력
             TodoContent(),
@@ -35,6 +35,7 @@ class AddList extends ConsumerWidget {
               // 타이틀을 입력해야 활성화
               visible: editing.title.isNotEmpty,
               child: Column(
+                spacing: AppSize.appPaddingM,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   //#region 선택된 이미지

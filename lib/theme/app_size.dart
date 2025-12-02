@@ -2,16 +2,22 @@
 class AppSize {
   // ========padding, borderRadius 값========
   /// 여백 S
-  static const appPaddingS = 16.0;
+  static const appPaddingS = 8.0;
+
+  /// 여백 S
+  static const appPaddingM = 16.0;
 
   /// 여백 M
-  static const appPaddingM = 30.0;
+  static const appPaddingL = 30.0;
 
   /// 컨테이너 여백 S
   static const containerPaddingS = 15.0;
 
   /// 컨테이너 borderRadius S
   static const containerRadiusS = 8.0;
+
+  /// 스크롤 패딩
+  static const scrollPadding = 5.0;
 
   // ========위젯 사이즈========
   /// 이름 설정/변경 컨테이너 높이
