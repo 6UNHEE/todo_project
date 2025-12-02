@@ -6,9 +6,6 @@ import 'package:todo_project/utils/logger.dart';
 class TagService {
   final _tagbox = Hive.box<TagModel>("tagbox");
 
-  /// 저장된 TagModel 반환
-  List<TagModel> get tagList => _tagbox.values.toList();
-
   /// 앱 시작 시 저장된 태그 불러오기
   Future<List<TagModel>> loadTag() async {
     return _tagbox.values.toList();
@@ -19,7 +16,6 @@ class TagService {
     // toString() 한 이유는 HiveError: Integer keys need to be in the range 0 - 0xFFFFFFFF 오류때문에
     // key를 다르게 해줘야 덮어쓰기가 되지않음!
     await _tagbox.put(tag.id.toString(), tag);
-    logger.d('저장되어있는 태그: $tag');
   }
 
   /// 저장된 태그 삭제
@@ -32,8 +28,8 @@ class TagService {
     final preTag = _tagbox.get(id); // 기존 태그
     if (preTag != null) {
       final updateTag = preTag.copyWith(name: newName);
+      logger.d('수정된 태그: $updateTag');
       await _tagbox.put(id.toString(), updateTag);
-      logger.d('태그 이름 수정 완료: $newName');
     }
   }
 }

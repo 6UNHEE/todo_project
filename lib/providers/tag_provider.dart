@@ -2,10 +2,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:todo_project/models/tag_model.dart';
 import 'package:todo_project/services/tag_service.dart';
+import 'package:todo_project/utils/logger.dart';
 
 final tagServiceProvider = Provider<TagService>((ref) => TagService());
 
-final tagProvider = StateNotifierProvider<TagNotifier, List<TagModel>>((ref) {
+final tagNotifierProvider = StateNotifierProvider<TagNotifier, List<TagModel>>((
+  ref,
+) {
   final service = ref.read(tagServiceProvider);
   return TagNotifier(service);
 });
@@ -17,9 +20,6 @@ class TagNotifier extends StateNotifier<List<TagModel>> {
   TagNotifier(this._tagService) : super([]) {
     loadTag();
   }
-
-  /// 저장된 Tag 반환
-  List<TagModel> get tagList => _tagService.tagList;
 
   /// 앱 시작 시 Tag list 불러오기
   Future<void> loadTag() async {
@@ -36,16 +36,18 @@ class TagNotifier extends StateNotifier<List<TagModel>> {
 
     state = [...state, tag];
     await _tagService.saveTag(tag: tag);
+    logger.d('추가한 태그: $tag');
   }
 
   /// Tag 삭제
   Future<void> removeTag({required int id}) async {
-    state = state.where((tag) => tag.id == id).toList();
+    state = state.where((tag) => tag.id != id).toList();
     await _tagService.deleteTag(id: id.toString());
+    logger.d('태그 삭제 완료');
   }
 
   /// Tag 수정
-  void updateTag({
+  Future<void> updateTag({
     required int index,
     required int id,
     required String newName,

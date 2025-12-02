@@ -2,7 +2,7 @@ import 'package:flutter_riverpod/legacy.dart';
 import 'package:todo_project/enums/todo_status_enum.dart';
 
 final statusProvider =
-    StateNotifierProvider<TodoStatusNotifier, TodoStatusEnum>(
+    StateNotifierProvider.autoDispose<TodoStatusNotifier, TodoStatusEnum>(
       (ref) => TodoStatusNotifier(),
     );
 

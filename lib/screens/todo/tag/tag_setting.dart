@@ -27,15 +27,15 @@ class _TagSettingState extends State<TagSetting> {
       ),
       child: Consumer(
         builder: (context, ref, child) {
-          final tagListLength = ref.watch(tagProvider).length;
+          final tagListLength = ref.watch(tagNotifierProvider).length;
           return ListView.builder(
-            itemCount: tagListLength + 1,
+            itemCount: tagListLength + 1, // 리스트 + 태그 추가 버튼
             itemBuilder: (context, index) {
               // 태그 추가
               if (index == 0) {
                 return AddTag();
               }
-              return TagList(index: index - 1);
+              return TagList(index: index - 1); // 태그 추가때문에 1빼기
             },
           );
         },

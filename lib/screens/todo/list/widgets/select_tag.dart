@@ -9,7 +9,7 @@ class SelectTag extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tagList = ref.read(tagProvider);
+    final tagList = ref.read(tagNotifierProvider);
 
     return PopupMenuButton(
       color: Colors.white,

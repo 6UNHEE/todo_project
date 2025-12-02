@@ -4,6 +4,8 @@ import 'package:todo_project/screens/todo/tag/tag_setting.dart';
 
 class MainSetting extends StatefulWidget {
   /// Main 화면 AppBar action
+  ///
+  /// 태그 편집, 필터 설정
   const MainSetting({super.key});
 
   @override
@@ -14,9 +16,9 @@ class _MainSettingState extends State<MainSetting> {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton(
-      onSelected: (value) {},
       itemBuilder: (context) {
         return [
+          //#region 태그 편집
           PopupMenuItem(
             onTap: () => showModalBottomSheet(
               context: context,
@@ -25,6 +27,9 @@ class _MainSettingState extends State<MainSetting> {
             ),
             child: Text('태그 편집'),
           ),
+          //#endregion
+
+          //#region 필터 설정
           PopupMenuItem(
             onTap: () => showModalBottomSheet(
               context: context,
@@ -33,6 +38,7 @@ class _MainSettingState extends State<MainSetting> {
 
             child: Text('필터 설정'),
           ),
+          //#endregion
         ];
       },
       icon: Icon(Icons.more_horiz),

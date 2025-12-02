@@ -15,11 +15,8 @@ class _FilterSettingState extends State<FilterSetting> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
-      padding: EdgeInsets.symmetric(
-        horizontal: AppSize.appPaddingS,
-        vertical: AppSize.appPaddingS,
-      ),
+      height: 120,
+      padding: EdgeInsets.symmetric(vertical: AppSize.appPaddingS),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
