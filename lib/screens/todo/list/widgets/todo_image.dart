@@ -19,14 +19,15 @@ class TodoImage extends ConsumerWidget {
             padding: EdgeInsets.symmetric(horizontal: AppSize.appPaddingS),
             child: GestureDetector(
               onTap: () {
+                // 클릭하면 이미지 삭제
                 ref.read(todoImageNotifierProvider.notifier).cancelImage();
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(AppSize.containerRadiusS),
                 child: Image.file(
                   File(imagePath),
-                  width: AppSize.imageSize,
-                  height: AppSize.imageSize,
+                  width: AppSize.imageSizeS,
+                  height: AppSize.imageSizeS,
                   fit: BoxFit.cover,
                 ),
               ),

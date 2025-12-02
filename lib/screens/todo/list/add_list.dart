@@ -16,7 +16,7 @@ class AddList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final editing = ref.watch(editTodoProvider);
+    final editing = ref.watch(editTodoNotifierProvider);
 
     return Padding(
       padding: EdgeInsets.only(
@@ -28,25 +28,44 @@ class AddList extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            //#region 제목 입력
             TodoContent(),
+            //#endregion
             Visibility(
+              // 타이틀을 입력해야 활성화
               visible: editing.title.isNotEmpty,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  //#region 선택된 이미지
                   TodoImage(),
+                  //#endregion
                   Row(
                     spacing: AppSize.appPaddingS,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      SizedBox(
-                        width: AppSize.appPaddingS,
-                      ), // textbutton 패딩이랑 비슷하게 주기
+                      // textbutton 패딩이랑 비슷하게 주기
+                      SizedBox(width: 1.0),
+
+                      //#region 선택된 태그 표시
                       Expanded(child: SelectedTag()),
+                      //#endregion
+
+                      //#region 이미지 업로드
                       UploadImage(),
+                      //#endregion
+
+                      //#region 태그 선택
                       SelectTag(),
+                      //#endregion
+
+                      //#region 임시저장 버튼
                       TemporayButton(),
+                      //#endregion
+
+                      //#region 완료 버튼
                       DoneButton(),
+                      //#endregion
                     ],
                   ),
                 ],

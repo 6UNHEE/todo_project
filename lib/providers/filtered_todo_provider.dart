@@ -5,9 +5,10 @@ import 'package:todo_project/providers/search_provider.dart';
 import 'package:todo_project/providers/todo_provider.dart';
 import 'package:todo_project/providers/todo_status_provider.dart';
 
+/// UI에 표시할 Todo 리스트 상태
 final filteredTodoProvider = Provider<List<TodoModel>>((ref) {
-  final todo = ref.watch(todoProvider); // todo crud
-  final status = ref.watch(statusProvider); // 전체,완료,미완료 필터
+  final todo = ref.watch(todoNotifierProvider); // todo crud
+  final status = ref.watch(statusNotifierProvider); // 전체,완료,미완료 필터
   final search = ref.watch(searchProvider); // 검색어
 
   List<TodoModel> filteredList = todo;

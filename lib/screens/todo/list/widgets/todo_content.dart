@@ -9,13 +9,13 @@ class TodoContent extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final editTodo = ref.read(editTodoProvider.notifier);
     return TextFormField(
       onChanged: (value) {
-        editTodo.updateTitle(title: value);
+        // 입력 관찰
+        ref.read(editTodoNotifierProvider.notifier).updateTitle(title: value);
       },
       maxLines: null,
-      maxLength: 100,
+      maxLength: 100, // 줄바꿈
       decoration: InputDecoration(
         border: InputBorder.none,
         hintText: '할 일 입력',

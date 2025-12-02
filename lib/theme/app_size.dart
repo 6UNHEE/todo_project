@@ -22,5 +22,6 @@ class AppSize {
   static const iconSizeL = 40.0;
 
   /// 이미지 크기
-  static const imageSize = 70.0;
+  static const imageSizeS = 70.0;
+  static const imageSizeM = 100.0;
 }

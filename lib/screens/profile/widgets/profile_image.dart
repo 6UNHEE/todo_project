@@ -40,10 +40,12 @@ class ProfileImage extends ConsumerWidget {
 
               //#region 삭제
               ElevatedButton(
-                onPressed: () {
-                  imageProvider.deleteProfileImage();
+                onPressed: () async {
+                  await imageProvider.deleteProfileImage();
 
-                  Navigator.pop(context);
+                  if (context.mounted) {
+                    Navigator.pop(context);
+                  }
                 },
                 child: Text('삭제'),
               ),

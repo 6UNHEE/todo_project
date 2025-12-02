@@ -19,7 +19,7 @@ class SelectTag extends ConsumerWidget {
             .map(
               (tag) => PopupMenuItem(
                 onTap: () {
-                  ref.read(editTodoProvider.notifier).addTag(tag: tag);
+                  ref.read(editTodoNotifierProvider.notifier).addTag(tag: tag);
                 },
                 child: Text(tag.name),
               ),

@@ -3,7 +3,7 @@ import 'package:todo_project/models/tag_model.dart';
 import 'package:todo_project/models/todo_model.dart';
 import 'package:todo_project/utils/logger.dart';
 
-final editTodoProvider =
+final editTodoNotifierProvider =
     StateNotifierProvider.autoDispose<EditTodoNotifier, TodoModel>(
       (ref) => EditTodoNotifier(),
     );
@@ -14,14 +14,6 @@ class EditTodoNotifier extends StateNotifier<TodoModel> {
     : super(
         TodoModel(id: 0, title: '', tag: [], createdAt: '0', isDone: false),
       );
-
-  final defaultTodo = TodoModel(
-    id: 0,
-    title: '',
-    tag: [],
-    createdAt: '0',
-    isDone: false,
-  );
 
   /// 입력중인 타이틀 관찰
   void updateTitle({required String title}) {
@@ -43,18 +35,5 @@ class EditTodoNotifier extends StateNotifier<TodoModel> {
     tagList.remove(tag);
     state = state.copyWith(tag: tagList);
     logger.d('삭제한 태그: $tag');
-  }
-
-  /// 완료되면 To do model 초기화
-  void resetModel() {
-    TodoModel initTodo = TodoModel(
-      id: 0,
-      title: '',
-      tag: [],
-      createdAt: '0',
-      isDone: false,
-    );
-
-    state = initTodo;
   }
 }

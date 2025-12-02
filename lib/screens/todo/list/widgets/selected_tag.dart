@@ -10,7 +10,7 @@ class SelectedTag extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedTag = ref.read(editTodoProvider).tag;
+    final selectedTag = ref.read(editTodoNotifierProvider).tag;
 
     return SingleChildScrollView(
       scrollDirection: Axis.horizontal,
@@ -22,7 +22,9 @@ class SelectedTag extends ConsumerWidget {
                 label: Text(tag.name),
                 labelStyle: TextStyle(color: AppTheme.charcoal),
                 onDeleted: () {
-                  ref.read(editTodoProvider.notifier).deleteTag(tag: tag);
+                  ref
+                      .read(editTodoNotifierProvider.notifier)
+                      .deleteTag(tag: tag);
                 },
                 backgroundColor: AppTheme.lightGray,
                 deleteIconColor: AppTheme.charcoal,

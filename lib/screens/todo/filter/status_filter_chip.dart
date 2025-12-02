@@ -11,7 +11,7 @@ class StatusFilterChip extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedStatus = ref.watch(statusProvider);
+    final selectedStatus = ref.watch(statusNotifierProvider);
 
     return Row(
       spacing: AppSize.appPaddingS,
@@ -21,7 +21,9 @@ class StatusFilterChip extends ConsumerWidget {
           label: Text(status.title),
           selected: selectedStatus == status,
           onSelected: (selected) {
-            ref.read(statusProvider.notifier).updateStatus(status: status);
+            ref
+                .read(statusNotifierProvider.notifier)
+                .updateStatus(status: status);
           },
           selectedColor: AppTheme.charcoal,
           backgroundColor: AppTheme.lightGray,

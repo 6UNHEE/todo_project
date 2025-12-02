@@ -13,6 +13,7 @@ final todoImageNotifierProvider =
       return TodoImageNotifier(service);
     });
 
+/// To do list 이미지 상태 관리
 class TodoImageNotifier extends StateNotifier<String?> {
   final ImageService _service;
 
@@ -24,7 +25,7 @@ class TodoImageNotifier extends StateNotifier<String?> {
     state = path;
   }
 
-  /// To do 이미지 업로드
+  /// 갤러리에서 이미지 불러오기
   Future<void> pickImage() async {
     final image = await _service.pickImage();
     if (image != null) {
@@ -38,13 +39,14 @@ class TodoImageNotifier extends StateNotifier<String?> {
   }
 
   /// To do 이미지 등록
-  Future<void> saveImage({
-    required String originPath,
-    required String fileName,
-  }) async {
+  Future<void> saveImage({required String originPath}) async {
+    // 파일명을 다르게 하기 위해 DateTime.now의 마지막 4자리를 파일명에 추가
+    final nowToString = DateTime.now().toString();
+    final last4 = nowToString.substring(nowToString.length - 4);
+
     state = await _service.saveImage(
       originPath: originPath,
-      fileName: fileName,
+      fileName: 'todo$last4.png',
     );
   }
 

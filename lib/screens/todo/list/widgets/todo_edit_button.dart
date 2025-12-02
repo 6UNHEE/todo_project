@@ -29,9 +29,14 @@ class TodoEditButton extends StatelessWidget {
                 Consumer(
                   builder: (context, ref, child) {
                     return ElevatedButton.icon(
-                      onPressed: () {
-                        ref.read(todoProvider.notifier).deleteList(id: id);
-                        Navigator.pop(context);
+                      onPressed: () async {
+                        await ref
+                            .read(todoNotifierProvider.notifier)
+                            .deleteList(id: id);
+
+                        if (context.mounted) {
+                          Navigator.pop(context);
+                        }
                       },
                       label: const Text('메모 삭제'),
                       icon: const Icon(Icons.edit),

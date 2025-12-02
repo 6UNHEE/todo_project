@@ -14,8 +14,7 @@ class TodoDetail extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final todoList = ref.read(todoProvider);
-    //final image = ref.read(todoImageNotifierProvider);
+    final todoList = ref.read(todoNotifierProvider);
 
     return Container(
       height: 300,
@@ -30,15 +29,20 @@ class TodoDetail extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          //#region 체크박스
           Checkbox(value: todoList[index].isDone, onChanged: (value) {}),
+          //#endregion
           Padding(
             padding: EdgeInsets.symmetric(horizontal: AppSize.appPaddingS),
+            //#region To do list 제목
             child: Text(
               todoList[index].title,
               style: TextStyle(fontSize: 20.0),
             ),
+            //#endregion
           ),
 
+          //#region 이미지
           Expanded(
             child: todoList[index].imagePath != null
                 ? Padding(
@@ -51,18 +55,21 @@ class TodoDetail extends ConsumerWidget {
                       ),
                       child: Image.file(
                         File(todoList[index].imagePath!),
-                        width: AppSize.imageSize,
-                        height: AppSize.imageSize,
+                        width: AppSize.imageSizeM,
+                        height: AppSize.imageSizeM,
                         fit: BoxFit.contain,
                       ),
                     ),
                   )
                 : SizedBox.shrink(),
           ),
+          //#endregion
           Padding(
             padding: EdgeInsets.symmetric(horizontal: AppSize.appPaddingS),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
+              //TODO 색상 변경이 안 되는 이유??
+              //#region 태그
               child: Row(
                 spacing: AppSize.appPaddingS,
                 children: todoList[index].tag
@@ -76,6 +83,7 @@ class TodoDetail extends ConsumerWidget {
                     )
                     .toList(),
               ),
+              //#endregion
             ),
           ),
         ],

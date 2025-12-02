@@ -11,36 +11,34 @@ class DoneButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final editTodo = ref.read(editTodoProvider);
-    final doneTodo = ref.read(todoProvider.notifier);
-    final image = ref.watch(todoImageNotifierProvider);
+    final editTodo = ref.read(editTodoNotifierProvider);
+    final imagePath = ref.watch(todoImageNotifierProvider);
 
     return TextButton(
-      onPressed: () {
+      onPressed: () async {
         final now = DateTime.now();
 
-        final nowToString = now.toString();
-        final last4 = now.toString().substring(nowToString.length - 4);
-
-        if (image != null) {
-          ref
+        if (imagePath != null) {
+          await ref
               .read(todoImageNotifierProvider.notifier)
-              .saveImage(originPath: image, fileName: 'todo$last4.png');
+              .saveImage(originPath: imagePath);
         }
 
-        final addTodo = TodoModel(
+        final newTodo = TodoModel(
           id: now.millisecondsSinceEpoch,
           title: editTodo.title,
           tag: editTodo.tag,
           createdAt: now.toIso8601String(),
           isDone: false,
-          imagePath: image,
+          imagePath: imagePath,
         );
 
-        doneTodo.addList(todo: addTodo);
-        ref.read(editTodoProvider.notifier).resetModel();
-        ref.read(todoImageNotifierProvider.notifier).cancelImage();
-        Navigator.pop(context);
+        // To do list 추가
+        await ref.read(todoNotifierProvider.notifier).addList(todo: newTodo);
+
+        if (context.mounted) {
+          Navigator.pop(context);
+        }
       },
       child: Text('완료'),
     );
