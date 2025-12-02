@@ -1,70 +1,80 @@
 # TODO 앱 구현
 
-## 기술 조건
-1. Flutter version 3.29.0 이상 
-2. Android 플랫폼
-3. Riverpod 사용
-4. Hive 사용
+## 기술 스택
+- Flutter 3.38.3 (Android)
+- 상태 관리: Riverpod
+- 로컬 저장: Hive
 
-### 기능
-1. 사용자 정보 등록 [ X ]
-2. Todo List
-   - 삭제 [ X ]
-   - 필터 [ X ]
-   - 검색 [ X ]
-3. Todo 상세
-   - 삭제 [ X ]
-   - 수정 [ ]
-4. Todo 추가
-   - 추가 [ ]
-   - 임시저장 [ ]
+## 주요 기능
+- 사용자 정보 등록
+- Todo 리스트
+  - 추가, 삭제, 필터, 검색
+- Todo 상세
+  - 삭제, 수정(미완성)
+- Todo 추가
+  - 이미지 및 태그 추가 가능
+  - 임시 저장(미완성)
 
-#### 개발 분석 노트
-> UI
+## 앱 구조
+- **UI ↔ Provider ↔ Service**
+  - **UI**: 화면 표시, 사용자 입력 처리
+  - **Provider/Notifier**: 상태 관리 및 UI와 Service 연결
+  - **Service**: 비즈니스 로직 담당 (Hive 저장/삭제/수정)
+  - 대부분 Service를 Provider로 등록 후, Notifier 생성자에서 Service를 받아 상태 관리
 
-- 공통 Scaffold 생성 
-  - 필수 : SafeArea, 바깥 여백
-  - 옵션 : AppBar 설정, child 위젯
-  
-1. 사용자 정보 등록 페이지
+## 화면 구성
+1. 메인 화면
+2. 사용자 정보 등록 화면 (이름, 프로필 사진)
+3. 리스트 추가 화면
+4. 리스트 수정 화면
+5. 태그 관리 화면 (추가/수정/삭제)
+6. 필터 설정 화면
 
-<img width="275" height="577" alt="Image" src="https://github.com/user-attachments/assets/0377640e-0049-4e45-adb5-3eb2cdfd18d3" /> <img width="276" height="580" alt="Image" src="https://github.com/user-attachments/assets/12822431-538b-4d22-9fba-50b4d1083042" />
-<img width="312" height="647" alt="Image" src="https://github.com/user-attachments/assets/0e0b2d0c-7732-43d1-b028-bc47f8c2edb4" />
+## 화면 흐름
+- 메인 화면
+  - 이름 클릭 → 사용자 정보 등록 화면
+  - + 버튼 클릭 → 리스트 추가 화면
+  - AppBar 액션 클릭 → 태그/필터 설정 화면
+  - 리스트 클릭 → 리스트 수정/삭제 화면
+- 사용자 정보 등록 화면
+  - 이름 클릭 → 이름 설정 화면
+  - 프로필 사진 클릭 → 프로필 설정 화면
+- 리스트 추가 화면
+  - 이미지, 태그 추가 가능
+- 태그 관리 화면
+  - 태그 추가/수정/삭제 가능
+- 필터 설정 화면
+  - 전체/완료/진행중 필터 가능
 
-   - 사용자 이름 클릭 시, 프로필 설정 화면으로 이동
-   - AppBar 추가
-   - Column 으로 배치, Padding으로 여백 
-   - 이름 클릭 시 설정할 수 있는 페이지로 이동
-   - 이름 10자 제한 
-   - 이름 변경 후 확인 클릭 시 설정 변경
-   - 프로필 사진 업로드 기능 공부 필요!
-   - Container 공통 위젯으로 묶기
-   - 프로필 사진을 설정하지 않은 경우 갤러리로 이동하여 프로필 사진 선택
-   - 프로필 사진을 설정한 경우 프로필 사진 클릭 시 AlertDialog로 수정/삭제/취소 선택 가능
-  
-  1. Todo List 
-   
-  <img width="213" height="451" alt="Image" src="https://github.com/user-attachments/assets/83f1362c-d488-4bfc-b81f-5e2f6555e8b3" />
-  <img width="336" height="703" alt="Image" src="https://github.com/user-attachments/assets/5176312f-6040-43ab-93d7-a05e99e91ffc" />
+## 데이터 모델
+- **TagModel**
+  - id (int): 고유 ID
+  - name (String): 태그 이름
+- **TodoModel**
+  - id (int): 고유 ID
+  - title (String)
+  - tag (List<TagModel>)
+  - createdAt (String)
+  - updatedAt (String, nullable)
+  - isDone (bool)
+  - imagePath (String, nullable)
 
-  - AppBar leading 위젯 popupmenubutton으로 필터 기능 추가
-  - 프로필 사진과 이름 표시, 이름 클릭 시 프로필 설정 화면으로 이동
-  - 각 항목은 List View + checkboxListTile으로 구현 
-  - 항목별로 삭제/수정 가능
-  - floatingActionButton으로 항목 추가 가능
-  - showBottomModalSheet로 메모 추가, 임시저장 가능
-  - 방법 1. (프로필 사진, 이름) (검색창) (리스트) 로 구성하고 리스트 제외한 위젯 사이즈를 정해준 뒤 리스트를 Expanded로 감싸줄 예정 → 
+## 개발 선택 이유
+- **상태 관리**: Riverpod 사용 → Provider 개념과 유사, UI와 Service 분리 용이
+- **로컬 저장**: Hive 사용 → 로컬 데이터 저장, SharedPreferences보다 구조화된 데이터 관리 가능
 
-> 상태 관리
-1. 사용자 정보
-   - **프로필 사진**, **이름**
-   - 입력 받으면 UI에 표시
-   - 이름은 저장된 값이 없으면 ""로 표시, 프로필 사진은 기본 이미지로 표시
+## 개발 고민 및 아쉬운 점
+- **UI 설계**
+  - 공통 UI 요소는 최대한 위젯으로 재사용
+  - 앱 테마와 자주 쓰는 설정은 클래스화하여 한 번만 변경하면 전체 적용
+- **상태 관리**
+  - Provider 개념과 비슷하지만 Provider + Service와 연동하는 구조가 어려웠음
+  - Service에서 상태를 관리하면 안된다는 점을 알게됨
+- **데이터 처리**
+  - Hive 객체 저장/일반 변수 저장 차이가 있는 것을 알게됨
+  - List<TagModel>가 null일 때 오류 발생 → 기본값 [] 처리했지만 오류 원인 이해 필요함
+  - 현재 구조는 main에서 box를 모두 열고 Service에서 사용 → 더 안전한 Hive 구조 설계 고민 필요
 
-2. To do 리스트
-   - **id**, **제목**, **이미지(옵션)**, **태그**, **created_at**, **updated_at**
-   - To do 모델 생성 
-  
-> Service
-1. 사용자 정보
-   - 프로필 사진, 이름 저장
+## 미완성 기능
+- 임시 저장 기능
+- 리스트 수정
