@@ -44,6 +44,7 @@ class TodoModel {
     String? updatedAt,
     bool? isDone,
     String? imagePath,
+    bool setImagePath = false,
   }) {
     return TodoModel(
       id: id ?? this.id,
@@ -52,7 +53,7 @@ class TodoModel {
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       isDone: isDone ?? this.isDone,
-      imagePath: imagePath ?? this.imagePath,
+      imagePath: setImagePath ? imagePath : this.imagePath,
     );
   }
 

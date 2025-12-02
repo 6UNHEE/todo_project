@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_project/providers/edit_todo_provider.dart';
+import 'package:todo_project/providers/draft_todo_provider.dart';
 import 'package:todo_project/theme/app_size.dart';
 
 class TodoContent extends ConsumerWidget {
@@ -12,7 +12,7 @@ class TodoContent extends ConsumerWidget {
     return TextFormField(
       onChanged: (value) {
         // 입력 관찰
-        ref.read(editTodoNotifierProvider.notifier).updateTitle(title: value);
+        ref.read(draftTodoNotifierProvider.notifier).updateTitle(title: value);
       },
       maxLines: null,
       maxLength: 100, // 줄바꿈

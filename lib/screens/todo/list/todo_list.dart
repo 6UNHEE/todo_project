@@ -49,7 +49,7 @@ class TodoList extends ConsumerWidget {
               //#endregion
 
               //#region 수정 버튼
-              trailing: TodoEditButton(id: todoList[index].id),
+              trailing: TodoEditButton(id: todoList[index].id, index: index),
               //#endregion
               contentPadding: EdgeInsets.zero,
               visualDensity: const VisualDensity(vertical: -4.0),

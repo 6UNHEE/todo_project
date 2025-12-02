@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_project/common/widgets/custom_scrollbar.dart';
-import 'package:todo_project/providers/edit_todo_provider.dart';
+import 'package:todo_project/providers/draft_todo_provider.dart';
 import 'package:todo_project/providers/scroll/scroll_provider.dart';
 import 'package:todo_project/theme/app_size.dart';
 import 'package:todo_project/theme/app_theme.dart';
@@ -12,7 +12,7 @@ class SelectedTag extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedTag = ref.read(editTodoNotifierProvider).tag;
+    final selectedTag = ref.read(draftTodoNotifierProvider).tag;
     final scrollController = ref.watch(editTagScrollProvider);
 
     return CustomScrollbar(
@@ -30,7 +30,7 @@ class SelectedTag extends ConsumerWidget {
                   labelStyle: TextStyle(color: AppTheme.charcoal),
                   onDeleted: () {
                     ref
-                        .read(editTodoNotifierProvider.notifier)
+                        .read(draftTodoNotifierProvider.notifier)
                         .deleteTag(tag: tag);
                   },
                   backgroundColor: AppTheme.lightGray,

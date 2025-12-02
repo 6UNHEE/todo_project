@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_project/models/todo_model.dart';
-import 'package:todo_project/providers/edit_todo_provider.dart';
+import 'package:todo_project/providers/draft_todo_provider.dart';
 import 'package:todo_project/providers/todo_image_provider.dart';
 import 'package:todo_project/providers/todo_provider.dart';
 
@@ -11,7 +11,7 @@ class DoneButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final editTodo = ref.read(editTodoNotifierProvider);
+    final draftTodo = ref.read(draftTodoNotifierProvider);
     final imagePath = ref.watch(todoImageNotifierProvider);
 
     return TextButton(
@@ -26,8 +26,8 @@ class DoneButton extends ConsumerWidget {
 
         final newTodo = TodoModel(
           id: now.millisecondsSinceEpoch,
-          title: editTodo.title,
-          tag: editTodo.tag,
+          title: draftTodo.title,
+          tag: draftTodo.tag,
           createdAt: now.toIso8601String(),
           isDone: false,
           imagePath: imagePath,

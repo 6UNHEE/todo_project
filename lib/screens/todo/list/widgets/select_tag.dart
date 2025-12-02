@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:todo_project/providers/draft_todo_provider.dart';
 import 'package:todo_project/providers/edit_todo_provider.dart';
 import 'package:todo_project/providers/tag_provider.dart';
 
@@ -19,6 +20,7 @@ class SelectTag extends ConsumerWidget {
             .map(
               (tag) => PopupMenuItem(
                 onTap: () {
+                  ref.read(draftTodoNotifierProvider.notifier).addTag(tag: tag);
                   ref.read(editTodoNotifierProvider.notifier).addTag(tag: tag);
                 },
                 child: Text(tag.name),

@@ -20,4 +20,14 @@ class TagModel extends HiveObject {
   String toString() {
     return 'TagModel(id: $id, name: $name)';
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TagModel &&
+          runtimeType == other.runtimeType &&
+          name == other.name;
+
+  @override
+  int get hashCode => name.hashCode;
 }

@@ -20,7 +20,6 @@ class TodoService {
     await _todobox.delete(id);
   }
 
-  // TODO 수정 구현하기
   /// 저장된 To do 수정
   Future<void> updateTodo({required TodoModel todo}) async {
     await _todobox.put(todo.id.toString(), todo);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:todo_project/providers/edit_todo_provider.dart';
+import 'package:todo_project/providers/draft_todo_provider.dart';
 import 'package:todo_project/screens/todo/list/widgets/done_button.dart';
 import 'package:todo_project/screens/todo/list/widgets/select_tag.dart';
 import 'package:todo_project/screens/todo/list/widgets/selected_tag.dart';
@@ -16,7 +16,7 @@ class AddList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final editing = ref.watch(editTodoNotifierProvider);
+    final draft = ref.watch(draftTodoNotifierProvider);
 
     return Padding(
       padding: EdgeInsets.only(
@@ -33,7 +33,7 @@ class AddList extends ConsumerWidget {
             //#endregion
             Visibility(
               // 타이틀을 입력해야 활성화
-              visible: editing.title.isNotEmpty,
+              visible: draft.title.isNotEmpty,
               child: Column(
                 spacing: AppSize.appPaddingM,
                 crossAxisAlignment: CrossAxisAlignment.start,
