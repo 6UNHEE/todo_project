@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_project/common/widgets/app_scaffold.dart';
 import 'package:todo_project/common/widgets/grey_container.dart';
 import 'package:todo_project/providers/user_name_provider.dart';
+import 'package:todo_project/utils/logger.dart';
 
 class NameSettingScreen extends ConsumerWidget {
   /// 이름 설정
@@ -10,29 +11,32 @@ class NameSettingScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final name = ref.watch(userNameNotifierProvider);
+
     return AppScaffold(
       title: Text('이름'),
       actions: [
         TextButton(
           onPressed: () async {
             // 확인 버튼 클릭 시 입력한 사용자 이름 저장
-            final userName = ref.read(userNameNotifierProvider);
             await ref
                 .read(userNameNotifierProvider.notifier)
-                .saveName(name: userName);
+                .saveName(name: name);
           },
           child: Text('확인'),
         ),
       ],
       child: GreyContainer(
-        child: TextField(
+        child: TextFormField(
           onChanged: (value) {
             ref.read(userNameNotifierProvider.notifier).updateName(name: value);
           },
-          maxLength: 30,
+          initialValue: name.isEmpty ? null : name,
+          maxLength: 10,
           decoration: InputDecoration(
-            hint: Text('이름 입력'),
+            hintText: '이름 입력',
             border: InputBorder.none,
+            counterText: '',
           ),
         ),
       ),
