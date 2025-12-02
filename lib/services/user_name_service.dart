@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 
 /// 사용자 정보 관련 Service
-class UserService {
+class UserNameService {
   final _userbox = Hive.box('userbox');
 
   static const String userNameKey = 'userName';

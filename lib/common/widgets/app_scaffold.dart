@@ -31,6 +31,10 @@ class AppScaffold extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: title,
+        titleTextStyle: TextStyle(
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+        ),
         centerTitle: true,
         actions: actions,
         scrolledUnderElevation: 0.0,

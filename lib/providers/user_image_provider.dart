@@ -41,7 +41,8 @@ class UserImageNotifier extends StateNotifier<String?> {
   }
 
   /// 프로필 사진 삭제
-  void deleteProfileImage() async {
+  Future<void> deleteProfileImage() async {
+    if (state == null) return;
     await _service.deleteSavedImage(fileName: _fileName);
     state = null;
     logger.d('프로필 사진 삭제');

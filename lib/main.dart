@@ -10,6 +10,7 @@ import 'package:todo_project/theme/app_theme.dart';
 void main() async {
   // Hive 초기화
   await Hive.initFlutter();
+  // Hive Adapter 등록
   Hive.registerAdapter(TagModelAdapter());
   Hive.registerAdapter(TodoModelAdapter());
   // box = 저장공간

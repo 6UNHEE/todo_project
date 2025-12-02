@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_project/common/widgets/app_scaffold.dart';
 import 'package:todo_project/common/widgets/grey_container.dart';
-import 'package:todo_project/providers/user_provider.dart';
+import 'package:todo_project/providers/user_name_provider.dart';
 import 'package:todo_project/screens/profile/name_setting_screen.dart';
 import 'package:todo_project/screens/profile/widgets/profile_image.dart';
 
@@ -17,7 +17,11 @@ class ProfileSettingScreen extends StatelessWidget {
       child: Column(
         spacing: 50.0,
         children: [
+          //#region 프로필 사진
           ProfileImage(),
+          //#endregion
+
+          //#region 이름
           GestureDetector(
             onTap: () => Navigator.push(
               context,
@@ -28,10 +32,10 @@ class ProfileSettingScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text('이름'),
+                  //#region 사용자 이름
                   Consumer(
                     builder: (context, ref, child) {
-                      final userService = ref.read(userServiceProvider);
-                      final name = userService.name;
+                      final name = ref.read(userNameNotifierProvider);
 
                       return Text(
                         name,
@@ -39,10 +43,12 @@ class ProfileSettingScreen extends StatelessWidget {
                       );
                     },
                   ),
+                  //#endregion
                 ],
               ),
             ),
           ),
+          //#endregion
         ],
       ),
     );
